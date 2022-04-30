@@ -8,5 +8,5 @@ there lie roots to the abyss.
 Drills deep in the darkness,
 all to fortify the base.
 
-So when you reach for the heavens and expand the earth,
+When you reach for the heavens and expand the earth,
 be mindful for what is underneath.

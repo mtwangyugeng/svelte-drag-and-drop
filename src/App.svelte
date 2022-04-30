@@ -1,11 +1,13 @@
 <script>
-  import logo from './assets/svelte.png'
-import SomeItem from './lib/SomeItem.svelte';
+import DropField from './lib/drag-and-drop/DropField.svelte';
+import SomeItem from './lib/drag-and-drop/SomeItem.svelte';
 </script>
 
 <main>
   hi mom
-  <SomeItem />
+    <SomeItem />
+    <SomeItem />
+    <DropField />
 </main>
 
 <style>
