@@ -27,13 +27,15 @@ const moveAround = (e) => {
         pX = e.clientX - spanWidth;
         pY = e.clientY - spanHeight;
     }
-    
 }
 
+const endMove = () => {
+    isMoving = false;
+}
 
 </script>
 
-<svelte:window on:mousemove={moveAround} />
+<svelte:window on:mousemove={moveAround} on:mouseup={endMove}/>
 
 <span on:mousedown={initiateMove}
     bind:this={span} 
