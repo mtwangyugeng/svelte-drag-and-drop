@@ -1,9 +1,12 @@
 <script>
-import { dragging } from "./store";
-/**
- * mousedown onto the element to register
- *  
-*/
+import { dragging, isColliding } from "./store";
+
+export let originX = 200;
+export let originY = 200;
+
+let pX = originX;
+let pY = originY;
+
 let span;
 let spanWidth;
 let spanHeight;
@@ -14,13 +17,13 @@ $: if(span) {
     spanHeight = span.offsetHeight / 2
 }
 
-let pX = 200;
-let pY = 200;
+
 
 let isMoving = false;
 
 const initiateMove = () => {
     isMoving = true;
+    isColliding.set(false)
 }
 
 const moveAround = (e) => {
@@ -32,6 +35,10 @@ const moveAround = (e) => {
 }
 
 const endMove = () => {
+    if (isMoving && !$isColliding) {
+        pX = originX;
+        pY = originY;
+    }
     isMoving = false;
     handleDrop();
 }
@@ -58,6 +65,7 @@ export const handleDrop = () => {
 
 <span on:mousedown={initiateMove}
     bind:this={span}
+    class:GoBack={!isMoving}
     style="top: {pY}px; left: {pX}px">
     <slot />
 </span>
@@ -65,5 +73,11 @@ export const handleDrop = () => {
 <style>
     span {
         position: absolute;
+        
+    }
+
+    .GoBack {
+        transition: all 0.2s ease;
+        transition-property: top, left;
     }
 </style>

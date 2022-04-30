@@ -8,10 +8,12 @@ import SomeItem from './lib/drag-and-drop/SomeItem.svelte';
     <SomeItem />
     <SomeItem />
     <DropField />
+	<DropField pX={200}/>
 </main>
 
 <style>
   main {
+	  position: relative;
 		height: 100vh;
     background-color: #777;
 		font-family: Arial, Helvetica, sans-serif;

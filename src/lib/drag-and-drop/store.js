@@ -10,3 +10,8 @@ export function isCollide(a, b) {
         (a.x > (b.x + b.width))
     );
 }
+
+export const isColliding = writable(false);
+
+// draggbles id: x, y, width, height, dropfieldId
+// dropFields id: x, y, width, height, draggbleId

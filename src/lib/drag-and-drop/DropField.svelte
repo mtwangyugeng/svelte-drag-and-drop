@@ -1,14 +1,14 @@
 <script>
-import { dragging, isCollide } from "./store";
+import { dragging, isCollide, isColliding } from "./store";
 
 
     let span;
     let info;
 
-    let pX = 0;
-    let pY = 0;
+    export let pX = 0;
+    export let pY = 0;
 
-    let isColliding = false;
+    // let isColliding = false;
     $: if (span) {
         info = {
             x:pX,
@@ -16,9 +16,10 @@ import { dragging, isCollide } from "./store";
             width: span.offsetWidth,
             height: span.offsetHeight,
         }
-        isColliding = isCollide($dragging, info)
+        const tf = isCollide($dragging, info);
+        isColliding.update(v=>v||tf)
     }
-    $: console.log(isColliding)
+    $: console.log($isColliding)
 </script>
 
 
@@ -34,6 +35,10 @@ import { dragging, isCollide } from "./store";
         background-color: yellow;
         height: 100px;
         width: 100px;
-        top: 0;
+        
+    }
+
+    span {
+        position: absolute;
     }
 </style>
