@@ -1,6 +1,23 @@
-import {writable} from 'svelte/store'
+import {writable, get} from 'svelte/store'
 
 export const dragging = writable({});
+export const dropFields = writable([]);
+
+
+export const isColliding = writable(false);
+
+function checkCollision (draggable, dropFields) {
+    for (let dropField of dropFields) {
+        if (isCollide(dropField, draggable))
+            return true;
+    }
+    return false
+}
+
+export function runCheckCollision () {
+    isColliding.set(checkCollision(get(dragging), get(dropFields)))
+}
+
 
 /**
  * isCollide:
@@ -8,7 +25,7 @@ export const dragging = writable({});
  * by mixal_bl4
  * Thank you!
  */
-export function isCollide(a, b) {
+ export function isCollide(a, b) {
     return !(
         ((a.y + a.height) < (b.y)) ||
         (a.y > (b.y + b.height)) ||
@@ -16,8 +33,3 @@ export function isCollide(a, b) {
         (a.x > (b.x + b.width))
     );
 }
-
-export const isColliding = writable(false);
-
-// draggbles id: x, y, width, height, dropfieldId
-// dropFields id: x, y, width, height, draggbleId

@@ -1,5 +1,6 @@
 <script>
-import { dragging, isCollide, isColliding } from "./store";
+import { dropFields } from "./store";
+
 
 
     let span;
@@ -16,10 +17,11 @@ import { dragging, isCollide, isColliding } from "./store";
             width: span.offsetWidth,
             height: span.offsetHeight,
         }
-        const tf = isCollide($dragging, info);
-        isColliding.update(v=>v||tf)
+        dropFields.update(v=>{
+            v.push(info);
+            return v;
+        })
     }
-    $: console.log($isColliding)
 </script>
 
 
