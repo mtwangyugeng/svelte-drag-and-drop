@@ -2,6 +2,12 @@ import {writable} from 'svelte/store'
 
 export const dragging = writable({});
 
+/**
+ * isCollide:
+ * https://codepen.io/mixal_bl4/pen/qZYWOm
+ * by mixal_bl4
+ * Thank you!
+ */
 export function isCollide(a, b) {
     return !(
         ((a.y + a.height) < (b.y)) ||
