@@ -10,8 +10,10 @@ export const collidingWith = writable(null);
 
 function checkCollision (draggable, dropFields) {
     for (let dropField of dropFields) {
-        if (isCollide(dropField, draggable))
+        if (isCollide(dropField, draggable)){
+            console.log('colliding with' + dropField.id)
             return true;
+        }
     }
     return false
 }

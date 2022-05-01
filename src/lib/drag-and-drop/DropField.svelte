@@ -1,17 +1,22 @@
 <script>
 import { dropFields } from "./store";
 
-
+    export let id;
 
     let span;
     let info;
 
-    export let pX = 0;
-    export let pY = 0;
+     let pX;
+     let pY;
 
-    // let isColliding = false;
-    $: if (span) {
-        info = {
+    import { onMount } from 'svelte';
+
+    onMount(async () => {
+        const bodyRect = span.getBoundingClientRect();
+        pX = bodyRect.left;
+        pY = bodyRect.top;
+		info = {
+            id:id,
             x:pX,
             y:pY,
             width: span.offsetWidth,
@@ -21,7 +26,7 @@ import { dropFields } from "./store";
             v.push(info);
             return v;
         })
-    }
+	});
 
 </script>
 

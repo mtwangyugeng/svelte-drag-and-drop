@@ -12,14 +12,13 @@
     </button>
 </Dragable>
 
-<DropField >
-    
+<DropField id=1>
 </DropField>
 
-<DropField >
+<DropField id=2>
 </DropField>
 
-<DropField >
+<DropField id=3>
 </DropField>
 
 <style>
