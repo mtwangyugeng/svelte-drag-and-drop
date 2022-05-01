@@ -26,15 +26,25 @@ import { dropFields } from "./store";
 </script>
 
 
-<div 
+<section 
     bind:this={span} 
     style="top: {pY}px; left: {pX}px">
-    <slot />
-</div>
+
+    <div class="Placeholder">
+        <slot />
+    </div>
+    
+</section>
 
 
 <style>
-    div {
+    .Placeholder {
+        width: 50px;
+        height: 50px;
+        background: white;
+    }
+
+    section {
         background-color: yellow;
         height: 100px;
         width: 100px;

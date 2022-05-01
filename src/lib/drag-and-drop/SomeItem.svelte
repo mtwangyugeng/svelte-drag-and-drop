@@ -1,14 +1,25 @@
 <script>
-import Dragable from "./Dragable.svelte";
-import DropField from "./DropField.svelte";
+    import Dragable from "./Dragable.svelte";
+    import DropField from "./DropField.svelte";
+
+
 
 </script>
 
+
+<Dragable>
+    <button>
+    </button>
+</Dragable>
+
 <DropField >
-    <Dragable>
-        <button>
-        </button>
-    </Dragable>
+    
+</DropField>
+
+<DropField >
+</DropField>
+
+<DropField >
 </DropField>
 
 <style>

@@ -6,6 +6,8 @@ export const dropFields = writable([]);
 
 export const isColliding = writable(false);
 
+export const collidingWith = writable(null);
+
 function checkCollision (draggable, dropFields) {
     for (let dropField of dropFields) {
         if (isCollide(dropField, draggable))

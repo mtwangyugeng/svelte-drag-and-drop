@@ -1,11 +1,9 @@
 <script>
-import DropField from './lib/drag-and-drop/DropField.svelte';
 import SomeItem from './lib/drag-and-drop/SomeItem.svelte';
 </script>
 
 <main>
   hi mom
-    <SomeItem />
     <SomeItem />
 </main>
 

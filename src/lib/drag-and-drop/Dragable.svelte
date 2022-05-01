@@ -89,10 +89,11 @@ export const handleDrop = () => {
 
     span{
         user-select: none;
+        position: fixed;
     }
 
     .Dragging {
-        position: fixed;
+       
         z-index: 99;
     }
 
