@@ -4,6 +4,8 @@ import { dropFields } from "./store";
     export let id;
 
     let span;
+    let placeholder;
+
     let info;
 
      let pX;
@@ -11,22 +13,30 @@ import { dropFields } from "./store";
 
     import { onMount } from 'svelte';
 
-    onMount(async () => {
+    $: if(span){
         const bodyRect = span.getBoundingClientRect();
         pX = bodyRect.left;
         pY = bodyRect.top;
+
+        const phRect = placeholder.getBoundingClientRect();
+        const phX = phRect.left;
+        const phY = phRect.top;
 		info = {
             id:id,
             x:pX,
             y:pY,
             width: span.offsetWidth,
             height: span.offsetHeight,
+
+            phX: phX,
+            phY: phY
+
         }
         dropFields.update(v=>{
             v.push(info);
             return v;
         })
-	});
+    }
 
 </script>
 
@@ -35,7 +45,9 @@ import { dropFields } from "./store";
     bind:this={span} 
     style="top: {pY}px; left: {pX}px">
 
-    <div class="Placeholder">
+    <div class="Placeholder"
+        bind:this={placeholder}
+    >
         <slot />
     </div>
     

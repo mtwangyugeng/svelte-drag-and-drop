@@ -12,6 +12,7 @@ function checkCollision (draggable, dropFields) {
     for (let dropField of dropFields) {
         if (isCollide(dropField, draggable)){
             console.log('colliding with' + dropField.id)
+            collidingWith.set(dropField)
             return true;
         }
     }

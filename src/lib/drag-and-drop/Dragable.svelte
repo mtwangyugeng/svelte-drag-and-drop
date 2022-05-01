@@ -1,5 +1,5 @@
 <script>
-import { runCheckCollision, dragging, isColliding } from "./store";
+import { runCheckCollision, dragging, isColliding, collidingWith } from "./store";
 
 let originX;
 let originY;
@@ -43,6 +43,10 @@ const endMove = () => {
     if (isMoving && !$isColliding) {
         pX = originX;
         pY = originY;
+    } else if (isMoving && $isColliding) {
+        pX = $collidingWith.phX
+        pY = $collidingWith.phY
+        
     }
 
     goingBack = true;
@@ -89,7 +93,7 @@ export const handleDrop = () => {
 
     span{
         user-select: none;
-        position: fixed;
+        position: absolute;
     }
 
     .Dragging {
