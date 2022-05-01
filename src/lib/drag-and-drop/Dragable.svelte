@@ -1,15 +1,16 @@
 <script>
 import { runCheckCollision, dragging, isColliding } from "./store";
 
-export let originX = 200;
-export let originY = 200;
+let originX;
+let originY;
 
-let pX = originX;
-let pY = originY;
+let pX;
+let pY;
 
 let span;
 let spanWidth;
 let spanHeight;
+
 
 // Change for the position of the cursor on the object.
 $: if(span) {
@@ -17,16 +18,20 @@ $: if(span) {
     spanHeight = span.offsetHeight / 2
 }
 
-
-
 let isMoving = false;
 
-const initiateMove = () => {
+const initiateMove = (e) => {
     isMoving = true;
-}
+    pX = e.clientX - spanWidth;
+    pY = e.clientY - spanHeight;
 
+    const bodyRect = span.getBoundingClientRect();
+    originX = bodyRect.left;
+    originY = bodyRect.top;
+}
+let goingBack = false;
 const moveAround = (e) => {
-    if (isMoving){
+    if (isMoving && !goingBack){
         pX = e.clientX - spanWidth;
         pY = e.clientY - spanHeight;
         collisionCheck()
@@ -39,8 +44,12 @@ const endMove = () => {
         pX = originX;
         pY = originY;
     }
-    isMoving = false;
-    
+
+    goingBack = true;
+    setTimeout(()=>{
+        goingBack = false;
+        isMoving = false;
+    }, 200)
 }
 
 // drag-drop
@@ -65,22 +74,30 @@ export const handleDrop = () => {
 }
 </script>
 
+
 <svelte:window on:mousemove={moveAround} on:mouseup={endMove}/>
 
 <span on:mousedown={initiateMove}
     bind:this={span}
-    class:GoBack={!isMoving}
+    class:Dragging = {isMoving}
+    class:GoBack={goingBack}
     style="top: {pY}px; left: {pX}px">
     <slot />
 </span>
 
 <style>
-    span {
-        position: absolute;
-        
+
+    span{
+        user-select: none;
+    }
+
+    .Dragging {
+        position: fixed;
+        z-index: 99;
     }
 
     .GoBack {
+        /* position: fixed; */
         transition: all 0.2s ease;
         transition-property: top, left;
     }

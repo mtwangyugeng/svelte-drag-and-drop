@@ -7,8 +7,6 @@ import SomeItem from './lib/drag-and-drop/SomeItem.svelte';
   hi mom
     <SomeItem />
     <SomeItem />
-    <DropField />
-	<DropField pX={200}/>
 </main>
 
 <style>

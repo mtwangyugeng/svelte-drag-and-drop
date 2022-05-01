@@ -22,14 +22,15 @@ import { dropFields } from "./store";
             return v;
         })
     }
+
 </script>
 
 
-<span 
+<div 
     bind:this={span} 
     style="top: {pY}px; left: {pX}px">
-    <div/>
-</span>
+    <slot />
+</div>
 
 
 <style>
@@ -37,10 +38,11 @@ import { dropFields } from "./store";
         background-color: yellow;
         height: 100px;
         width: 100px;
+        margin: 100px;
+        border: 1px solid black;
         
-    }
-
-    span {
-        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
