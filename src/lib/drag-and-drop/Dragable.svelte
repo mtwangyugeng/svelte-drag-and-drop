@@ -16,6 +16,7 @@ let spanHeight;
 $: if(span) {
     spanWidth = span.offsetWidth / 2
     spanHeight = span.offsetHeight / 2
+    console.log(span)
 }
 
 let isMoving = false;
@@ -85,7 +86,8 @@ export const handleDrop = () => {
     bind:this={span}
     class:Dragging = {isMoving}
     class:GoBack={goingBack}
-    style="top: {pY}px; left: {pX}px">
+    style="top: {pY}px; left: {pX}px"
+>
     <slot />
 </span>
 
