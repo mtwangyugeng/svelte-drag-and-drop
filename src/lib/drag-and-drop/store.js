@@ -1,6 +1,8 @@
 import {writable, get} from 'svelte/store'
 
-export const dragging = writable({});
+export const dragging = writable(null);
+export const draggingElement = writable(null);
+
 export const dropFields = writable([]);
 
 

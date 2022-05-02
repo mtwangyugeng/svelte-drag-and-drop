@@ -1,5 +1,5 @@
 <script>
-import { runCheckCollision, dragging, isColliding, collidingWith } from "./store";
+import { runCheckCollision, dragging, isColliding, collidingWith, draggingElement } from "./store";
 
 let originX;
 let originY;
@@ -11,12 +11,14 @@ let span;
 let spanWidth;
 let spanHeight;
 
+export let loadValue = "loadValue shouldn't be empty."
 
 // Change for the position of the cursor on the object.
 $: if(span) {
     spanWidth = span.offsetWidth / 2
     spanHeight = span.offsetHeight / 2
-    console.log(span)
+    span.attributes.loadValue = loadValue
+    console.log(span.attributes.loadValue)
 }
 
 let isMoving = false;
@@ -35,12 +37,12 @@ const moveAround = (e) => {
     if (isMoving && !goingBack){
         pX = e.clientX - spanWidth;
         pY = e.clientY - spanHeight;
+        draggingElement.set(span)
         collisionCheck()
     }
 }
 
 const endMove = () => {
-    handleDrop();
     if (isMoving && !$isColliding) {
         pX = originX;
         pY = originY;
@@ -49,7 +51,7 @@ const endMove = () => {
         pY = $collidingWith.phY
         
     }
-
+    dragging.set(null);
     goingBack = true;
     setTimeout(()=>{
         goingBack = false;
@@ -68,15 +70,6 @@ const collisionCheck = () => {
     runCheckCollision()
 }
 
-const setDragging = () => {
-    
-}
-
-export const handleDrag = () => {
-    
-}
-export const handleDrop = () => {
-}
 </script>
 
 

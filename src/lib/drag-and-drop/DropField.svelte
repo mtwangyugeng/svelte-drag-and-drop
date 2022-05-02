@@ -1,7 +1,21 @@
 <script>
-import { dropFields } from "./store";
+    /**
+     * the Dropfield must know the exact element droped in
+     */
+import { collidingWith, dragging, draggingElement, dropFields } from "./store";
 
     export let id;
+    
+    export let onReceive = (recievedElement) => {
+        console.log(id, recievedElement)
+    };
+
+    $: if (!$dragging && $collidingWith && $collidingWith?.phX == phX && $collidingWith?.phY == phY) {
+        console.log(id,"recievedElement")
+        onReceive($draggingElement)
+        
+    }
+    // When draggable is recieved.
 
     let span;
     let placeholder;
@@ -11,7 +25,8 @@ import { dropFields } from "./store";
      let pX;
      let pY;
 
-    import { onMount } from 'svelte';
+     let phX;
+     let phY;
 
     $: if(span){
         const bodyRect = span.getBoundingClientRect();
@@ -19,8 +34,8 @@ import { dropFields } from "./store";
         pY = bodyRect.top;
 
         const phRect = placeholder.getBoundingClientRect();
-        const phX = phRect.left;
-        const phY = phRect.top;
+        phX = phRect.left;
+        phY = phRect.top;
 		info = {
             id:id,
             x:pX,
@@ -65,7 +80,7 @@ import { dropFields } from "./store";
         background-color: yellow;
         height: 100px;
         width: 100px;
-        margin: 100px;
+        /* margin: 100px; */
         border: 1px solid black;
         
         display: flex;
