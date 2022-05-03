@@ -1,5 +1,5 @@
 <script>
-import { runCheckCollision, dragging, isColliding, collidingWith, draggingElement } from "./store";
+import { dragging, isColliding, collidingWith, draggingElement } from "./store";
 
 let originX;
 let originY;
@@ -38,7 +38,7 @@ const moveAround = (e) => {
         pX = e.clientX - spanWidth;
         pY = e.clientY - spanHeight;
         draggingElement.set(span)
-        collisionCheck()
+        setDragging()
     }
 }
 
@@ -60,14 +60,14 @@ const endMove = () => {
 }
 
 // drag-drop
-const collisionCheck = () => {
+const setDragging = () => {
     dragging.set({
         x: pX,
         y: pY,
         width: span.offsetWidth,
         height: span.offsetHeight,
     })
-    runCheckCollision()
+    // runCheckCollision()
 }
 
 </script>

@@ -21,9 +21,9 @@ function checkCollision (draggable, dropFields) {
     return false
 }
 
-export function runCheckCollision () {
-    isColliding.set(checkCollision(get(dragging), get(dropFields)))
-}
+// export function runCheckCollision () {
+//     isColliding.set(checkCollision(get(dragging), get(dropFields)))
+// }
 
 
 /**

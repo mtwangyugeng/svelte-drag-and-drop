@@ -1,20 +1,66 @@
+<script context="module">
+    /**
+     * isCollide:
+     * https://codepen.io/mixal_bl4/pen/qZYWOm
+     * by mixal_bl4
+     * Thank you!
+     */
+    export function isCollide(a, b) {
+        return !(
+            ((a.y + a.height) < (b.y)) ||
+            (a.y > (b.y + b.height)) ||
+            ((a.x + a.width) < b.x) ||
+            (a.x > (b.x + b.width))
+        );
+    }
+</script>
+
 <script>
     /**
      * the Dropfield must know the exact element droped in
      */
-import { collidingWith, dragging, draggingElement, dropFields } from "./store";
-import {createEventDispatcher} from 'svelte';
-    const dispatch = createEventDispatcher();
+    import {isColliding, collidingWith, dragging, draggingElement, dropFields } from "./store";
+    import {createEventDispatcher} from 'svelte';
+   
     export let id;
 
-    $: if (!$dragging && $collidingWith && $collidingWith?.phX == phX && $collidingWith?.phY == phY) {
-        console.log(id,"recievedElement")
-        dispatch('receive', {
-            element: $draggingElement
-        });
-        
+    const dispatch = createEventDispatcher();
+    /**
+     * Events to emit: 
+     * 1. Enter the dropfield
+     *      - should only emit once when then draggable first entered
+     * 2. Leave the dropfield
+     *      - must emit when the droppable enters another dropfield.
+     *      - so save the last dropfield the draggable entered
+     * 3. Drop into the dropfield
+     * 
+    */
+
+    // 1. Enter the dropfield
+    $: if($dragging){ 
+        const tf = isCollide($dragging, info)
+        if(tf) {
+            // if the entered field is not occupied
+            collidingWith.set(info)
+            isColliding.set(true) // ?
+            dispatch('enter', {
+                element: $draggingElement
+            })
+        }
     }
-    // When draggable is recieved.
+
+    // Event: a draggable is droped into the dropfield  
+    $: if ( $collidingWith && $collidingWith?.phX == phX && $collidingWith?.phY == phY) {
+        console.log(id,"recievedElement")
+        if (!$dragging){
+            dispatch('receive', {
+                element: $draggingElement
+            });
+        }
+    }
+
+    // When dragging element entered the field
+   
 
     let span;
     let placeholder;
@@ -57,8 +103,8 @@ import {createEventDispatcher} from 'svelte';
 
 <section 
     bind:this={span} 
-    style="top: {pY}px; left: {pX}px">
-
+    style="top: {pY}px; left: {pX}px"
+    >
     <div class="Placeholder"
         bind:this={placeholder}
     >
