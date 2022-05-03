@@ -1,10 +1,11 @@
 <script>
+import TicTacToe from './lib/demos/tic-tac-toe/TicTacToe.svelte';
 import SomeItem from './lib/drag-and-drop/SomeItem.svelte';
 </script>
 
 <main>
-  hi mom
-    <SomeItem />
+	.
+	<TicTacToe />
 </main>
 
 <style>
@@ -13,6 +14,8 @@ import SomeItem from './lib/drag-and-drop/SomeItem.svelte';
 		height: 100vh;
     background-color: #777;
 		font-family: Arial, Helvetica, sans-serif;
+
+		overflow: auto;
 	}
 
 	:global(*) {

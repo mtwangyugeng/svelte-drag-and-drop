@@ -3,16 +3,15 @@
      * the Dropfield must know the exact element droped in
      */
 import { collidingWith, dragging, draggingElement, dropFields } from "./store";
-
+import {createEventDispatcher} from 'svelte';
+    const dispatch = createEventDispatcher();
     export let id;
-    
-    export let onReceive = (recievedElement) => {
-        console.log(id, recievedElement)
-    };
 
     $: if (!$dragging && $collidingWith && $collidingWith?.phX == phX && $collidingWith?.phY == phY) {
         console.log(id,"recievedElement")
-        onReceive($draggingElement)
+        dispatch('receive', {
+            element: $draggingElement
+        });
         
     }
     // When draggable is recieved.
