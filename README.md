@@ -7,6 +7,3 @@ Peeking underneath the humanity,
 there lie roots to the abyss.
 Drills deep in the darkness,
 all to fortify the base.
-
-When you reach for the heavens and expand the earth,
-be mindful for what is underneath.

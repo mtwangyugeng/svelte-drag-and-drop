@@ -18,7 +18,7 @@ const changeGrid = (i, j) => {
 </script>
 
 <section>
-<DropField id=0>
+<DropField>
     <Dragable loadValue="O">
         <button>
             O
@@ -26,7 +26,7 @@ const changeGrid = (i, j) => {
     </Dragable>
 </DropField>
 
-<DropField id=0>
+<DropField>
     <Dragable loadValue="X">
         <button>
             X

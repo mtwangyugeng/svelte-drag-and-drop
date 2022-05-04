@@ -1,8 +1,11 @@
 <script context="module">
     import {writable} from 'svelte/store'
 
+    export const nextId = writable(0);
+
+    // last entered element
     export const focusedField = writable(null);
-    
+    export const lastFocusedField = writable(null);
     /**
      * isCollide:
      * https://codepen.io/mixal_bl4/pen/qZYWOm
@@ -26,38 +29,43 @@
     import {dragging, draggingElement} from "./Dragable.svelte";
     import {createEventDispatcher} from 'svelte';
    
-    export let id;
 
     const dispatch = createEventDispatcher();
-    /**
-     * Events to emit: 
-     * 1. Enter the dropfield
-     *      - should only emit once when then draggable first entered
-     * 2. Leave the dropfield
-     *      - must emit when the droppable enters another dropfield.
-     *      - so save the last dropfield the draggable entered
-     * 3. Drop into the dropfield
-     * 
-    */
-   let focused = false;
-   // focus when the dropfield is entered
-   // unfocus when a new dropfield is entered
+    $: focused = id === $focusedField?.id;
 
-    // 1. Enter the dropfield
-    $: if($dragging){ 
-        const tf = isCollide($dragging, info)
-        if(tf) {
-            // if the entered field is not occupied
-            focusedField.set(info)
-            dispatch('enter', {
-                element: $draggingElement
-            })
+    // 1. focus the dropfield
+    dragging.subscribe((v)=>{
+        if(v) {
+            if(isCollide(v, info)){ 
+                console.log($focusedField?.id, $lastFocusedField?.id, info.id)
+                if ($focusedField?.id !== info.id && $lastFocusedField?.id !== info.id){
+                    lastFocusedField.set($focusedField)
+                    focusedField.set(info)
+                } 
+            } else {
+                if($lastFocusedField?.id === info.id || !$focusedField ) {
+                    lastFocusedField.set(null)
+                }
+                if($focusedField?.id === info.id ) {
+                    focusedField.set(null)
+                }
+            }
         }
-    }
+
+        if ( $focusedField && $focusedField?.phX == phX && $focusedField?.phY == phY) {
+            if (!$dragging){
+                dispatch('receive', {
+                    element: $draggingElement
+                });
+                lastFocusedField.set(null)
+                // focusedField.set(null)
+            }
+        }
+    })
+     
 
     // Event: a draggable is droped into the dropfield  
     $: if ( $focusedField && $focusedField?.phX == phX && $focusedField?.phY == phY) {
-        console.log(id,"recievedElement")
         if (!$dragging){
             dispatch('receive', {
                 element: $draggingElement
@@ -79,6 +87,9 @@
      let phX;
      let phY;
 
+    let id = $nextId;
+    nextId.update( v => v + 1 )
+
     $: if(span){
         const bodyRect = span.getBoundingClientRect();
         pX = bodyRect.left;
@@ -87,10 +98,13 @@
         const phRect = placeholder.getBoundingClientRect();
         phX = phRect.left;
         phY = phRect.top;
+
+        
+
 		info = {
-            id:id,
-            x:pX,
-            y:pY,
+            id: id,
+            x: pX,
+            y: pY,
             width: span.offsetWidth,
             height: span.offsetHeight,
 

@@ -14,7 +14,7 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
 
 <div>
 {grid}
-<DropField id="." on:receive = {handleRecieve}>
+<DropField on:receive = {handleRecieve}>
 
 </DropField>
 </div>

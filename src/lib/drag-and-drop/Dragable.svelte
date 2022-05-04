@@ -1,7 +1,5 @@
 <script context="module">
-
 import { writable } from "svelte/store";
-// the dropField that is currently focused on
 
 export const dragging = writable(null);
 export const draggingElement = writable(null);
