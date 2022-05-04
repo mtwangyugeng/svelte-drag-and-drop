@@ -63,9 +63,11 @@
         }
     })
      
-
+    let holdingElement = null
     // Event: a draggable is droped into the dropfield  
     $: if ( $focusedField && $focusedField?.phX == phX && $focusedField?.phY == phY) {
+        holdingElement = $draggingElement;
+        placeholder.appendChild(holdingElement)
         if (!$dragging){
             dispatch('receive', {
                 element: $draggingElement
@@ -125,6 +127,7 @@
     <div class="Placeholder"
         bind:this={placeholder}
     >
+    
         <slot />
     </div>
     

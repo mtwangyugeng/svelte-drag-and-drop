@@ -107,7 +107,7 @@ const setDragging = () => {
     }
 
     .GoBack {
-        /* position: fixed; */
+        /* position: relative; */
         transition: all 0.2s ease;
         transition-property: top, left;
     }
