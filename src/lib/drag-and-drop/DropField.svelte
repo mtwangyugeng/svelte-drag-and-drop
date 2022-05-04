@@ -120,7 +120,7 @@
 <section 
     bind:this={span} 
     style="top: {pY}px; left: {pX}px"
-    class:Focused = {focused}
+    class:Focused = {focused && $dragging}
     >
     <div class="Placeholder"
         bind:this={placeholder}

@@ -1,6 +1,5 @@
 <script>
 import TicTacToe from './lib/demos/tic-tac-toe/TicTacToe.svelte';
-import SomeItem from './lib/drag-and-drop/SomeItem.svelte';
 </script>
 
 <main>
