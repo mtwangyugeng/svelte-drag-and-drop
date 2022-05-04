@@ -1,5 +1,15 @@
+<script context="module">
+
+import { writable } from "svelte/store";
+// the dropField that is currently focused on
+
+export const dragging = writable(null);
+export const draggingElement = writable(null);
+</script>
+
 <script>
-import { dragging, isColliding, collidingWith, draggingElement } from "./store";
+
+import {focusedField} from "./DropField.svelte"
 
 let originX;
 let originY;
@@ -43,13 +53,15 @@ const moveAround = (e) => {
 }
 
 const endMove = () => {
-    if (isMoving && !$isColliding) {
-        pX = originX;
-        pY = originY;
-    } else if (isMoving && $isColliding) {
-        pX = $collidingWith.phX
-        pY = $collidingWith.phY
-        
+    if(isMoving ){
+        if (!$focusedField) {
+            pX = originX;
+            pY = originY;
+        } else {
+            pX = $focusedField.phX
+            pY = $focusedField.phY
+            
+        }
     }
     dragging.set(null);
     goingBack = true;

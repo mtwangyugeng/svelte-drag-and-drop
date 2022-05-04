@@ -1,4 +1,8 @@
 <script context="module">
+    import {writable} from 'svelte/store'
+
+    export const focusedField = writable(null);
+    
     /**
      * isCollide:
      * https://codepen.io/mixal_bl4/pen/qZYWOm
@@ -19,7 +23,7 @@
     /**
      * the Dropfield must know the exact element droped in
      */
-    import {isColliding, collidingWith, dragging, draggingElement, dropFields } from "./store";
+    import {dragging, draggingElement} from "./Dragable.svelte";
     import {createEventDispatcher} from 'svelte';
    
     export let id;
@@ -35,14 +39,16 @@
      * 3. Drop into the dropfield
      * 
     */
+   let focused = false;
+   // focus when the dropfield is entered
+   // unfocus when a new dropfield is entered
 
     // 1. Enter the dropfield
     $: if($dragging){ 
         const tf = isCollide($dragging, info)
         if(tf) {
             // if the entered field is not occupied
-            collidingWith.set(info)
-            isColliding.set(true) // ?
+            focusedField.set(info)
             dispatch('enter', {
                 element: $draggingElement
             })
@@ -50,7 +56,7 @@
     }
 
     // Event: a draggable is droped into the dropfield  
-    $: if ( $collidingWith && $collidingWith?.phX == phX && $collidingWith?.phY == phY) {
+    $: if ( $focusedField && $focusedField?.phX == phX && $focusedField?.phY == phY) {
         console.log(id,"recievedElement")
         if (!$dragging){
             dispatch('receive', {
@@ -92,10 +98,6 @@
             phY: phY
 
         }
-        dropFields.update(v=>{
-            v.push(info);
-            return v;
-        })
     }
 
 </script>
@@ -104,6 +106,7 @@
 <section 
     bind:this={span} 
     style="top: {pY}px; left: {pX}px"
+    class:Focused = {focused}
     >
     <div class="Placeholder"
         bind:this={placeholder}
@@ -115,6 +118,9 @@
 
 
 <style>
+    .Focused {
+        background-color: green;
+    }
     .Placeholder {
         width: 50px;
         height: 50px;
