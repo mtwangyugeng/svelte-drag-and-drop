@@ -87,6 +87,7 @@ const setDragging = () => {
 
 <span on:mousedown={initiateMove}
     bind:this={span}
+    class:Rigid = {!isMoving}
     class:Dragging = {isMoving}
     class:GoBack={goingBack}
     style="top: {pY}px; left: {pX}px"
@@ -95,7 +96,9 @@ const setDragging = () => {
 </span>
 
 <style>
-
+    .Rigid {
+        position: static;
+    }
     span{
         user-select: none;
         position: absolute;
@@ -108,6 +111,7 @@ const setDragging = () => {
 
     .GoBack {
         /* position: relative; */
+        position: absolute;
         transition: all 0.2s ease;
         transition-property: top, left;
     }

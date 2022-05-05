@@ -50,25 +50,28 @@
                     focusedField.set(null)
                 }
             }
-        }
+        } else {
+            if ( focused) {
 
-        if ( $focusedField && $focusedField?.phX == phX && $focusedField?.phY == phY) {
-            if (!$dragging){
+                setTimeout(()=>{
+                    holdingElement = $draggingElement;
+                    placeholder.appendChild(holdingElement)
+                }, 200)
                 dispatch('receive', {
                     element: $draggingElement
                 });
-                lastFocusedField.set(null)
-                // focusedField.set(null)
             }
         }
     })
      
     let holdingElement = null
     // Event: a draggable is droped into the dropfield  
-    $: if ( $focusedField && $focusedField?.phX == phX && $focusedField?.phY == phY) {
-        holdingElement = $draggingElement;
-        placeholder.appendChild(holdingElement)
+    $: if ( focused) {
         if (!$dragging){
+            setTimeout(()=>{
+                holdingElement = $draggingElement;
+                placeholder.appendChild(holdingElement)
+            }, 200)
             dispatch('receive', {
                 element: $draggingElement
             });
