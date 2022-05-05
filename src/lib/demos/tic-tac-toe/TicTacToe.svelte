@@ -19,7 +19,7 @@ const changeGrid = (i, j) => {
 </script>
 
 <section>
-    <SmallScreen board = board />
+    <SmallScreen board = {board} />
 <DropField>
     <Dragable loadValue="O">
         <button>
@@ -41,7 +41,7 @@ const changeGrid = (i, j) => {
     {#each board as row,i (i)}
         <div class="Row">
             {#each row as grid,j (j)}
-                <Grid grid={grid} changeGrid={changeGrid(i, j)}/>
+                <Grid changeGrid={changeGrid(i, j)}/>
             {/each}
         </div>
     {/each}

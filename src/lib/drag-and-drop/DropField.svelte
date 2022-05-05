@@ -30,9 +30,10 @@
     import {createEventDispatcher} from 'svelte';
 import { BACK_AMINATION_SPEED } from './const';
    
+    export let enabled = true;
 
     const dispatch = createEventDispatcher();
-    $: focused = id === $focusedField?.id;
+    $: focused = id === $focusedField?.id && enabled;
 
     // 1. focus the dropfield
     dragging.subscribe((v)=>{
