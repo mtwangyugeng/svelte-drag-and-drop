@@ -89,6 +89,7 @@ import { BACK_AMINATION_SPEED } from './const';
     }
 
     const iniInfo = () => {
+        console.log("IniInfo")
         const bodyRect = span.getBoundingClientRect();
         pX = bodyRect.left;
         pY = bodyRect.top;
@@ -114,10 +115,9 @@ import { BACK_AMINATION_SPEED } from './const';
 
 </script>
 
-
+<svelte:window on:scroll|capture={iniInfo} on:resize={iniInfo}/>
 <section 
     bind:this={span} 
-    style="top: {pY}px; left: {pX}px"
     class:Focused = {focused && $dragging}
     >
     <div class="Placeholder"

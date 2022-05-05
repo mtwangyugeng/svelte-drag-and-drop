@@ -51,6 +51,7 @@ const changeGrid = (i, j) => {
 <style>
     section {
         margin: 200px;
+        background-color: blue;
     }
     button {
         background-color: red;
