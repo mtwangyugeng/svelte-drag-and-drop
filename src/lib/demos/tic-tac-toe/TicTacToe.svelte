@@ -2,6 +2,7 @@
     import Dragable from "../../drag-and-drop/Dragable.svelte";
     import DropField from "../../drag-and-drop/DropField.svelte";
     import Grid from "./Grid.svelte";
+import SmallScreen from "./SmallScreen.svelte";
 
     let board = [
         [null, null, null],
@@ -18,6 +19,7 @@ const changeGrid = (i, j) => {
 </script>
 
 <section>
+    <SmallScreen board = board />
 <DropField>
     <Dragable loadValue="O">
         <button>

@@ -59,7 +59,7 @@ import { BACK_AMINATION_SPEED } from './const';
             if ( focused) {
                 setTimeout(()=>{
                     placeholder.appendChild($draggingElement)
-                }, 200)
+                }, BACK_AMINATION_SPEED)
                 dispatch('receive', {
                     element: $draggingElement
                 });
@@ -85,6 +85,10 @@ import { BACK_AMINATION_SPEED } from './const';
     nextId.update( v => v + 1 )
 
     $: if(span){
+        iniInfo()
+    }
+
+    const iniInfo = () => {
         const bodyRect = span.getBoundingClientRect();
         pX = bodyRect.left;
         pY = bodyRect.top;

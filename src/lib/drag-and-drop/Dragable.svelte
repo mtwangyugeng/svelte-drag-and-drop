@@ -102,11 +102,10 @@ const setDragging = () => {
     }
     span{
         user-select: none;
-        position: absolute;
     }
 
     .Dragging {
-       
+        position: absolute;
         z-index: 99;
     }
 
