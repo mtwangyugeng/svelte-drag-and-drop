@@ -1,0 +1,1 @@
+export const BACK_AMINATION_SPEED = 200
