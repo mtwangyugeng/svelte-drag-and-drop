@@ -42,6 +42,10 @@ import { BACK_AMINATION_SPEED } from './const';
                 if ($focusedField?.id !== info.id && $lastFocusedField?.id !== info.id){
                     lastFocusedField.set($focusedField)
                     focusedField.set(info)
+
+                    dispatch('enter', {
+                        element: $draggingElement
+                    });
                 } 
             } else {
                 if($lastFocusedField?.id === info.id || !$focusedField ) {
@@ -53,10 +57,8 @@ import { BACK_AMINATION_SPEED } from './const';
             }
         } else {
             if ( focused) {
-
                 setTimeout(()=>{
-                    holdingElement = $draggingElement;
-                    placeholder.appendChild(holdingElement)
+                    placeholder.appendChild($draggingElement)
                 }, 200)
                 dispatch('receive', {
                     element: $draggingElement
@@ -65,19 +67,6 @@ import { BACK_AMINATION_SPEED } from './const';
         }
     })
      
-    let holdingElement = null
-    // Event: a draggable is droped into the dropfield  
-    $: if ( focused) {
-        if (!$dragging){
-            setTimeout(()=>{
-                holdingElement = $draggingElement;
-                placeholder.appendChild(holdingElement)
-            }, BACK_AMINATION_SPEED)
-            dispatch('receive', {
-                element: $draggingElement
-            });
-        }
-    }
     // When dragging element entered the field
    
 
