@@ -1,5 +1,6 @@
 <script context="module">
 import { writable } from "svelte/store";
+import { BACK_AMINATION_SPEED } from "./const";
 
 export const dragging = writable(null);
 export const draggingElement = writable(null);
@@ -66,7 +67,7 @@ const endMove = () => {
     setTimeout(()=>{
         goingBack = false;
         isMoving = false;
-    }, 200)
+    }, BACK_AMINATION_SPEED)
 }
 
 // drag-drop

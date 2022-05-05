@@ -28,6 +28,7 @@
      */
     import {dragging, draggingElement} from "./Dragable.svelte";
     import {createEventDispatcher} from 'svelte';
+import { BACK_AMINATION_SPEED } from './const';
    
 
     const dispatch = createEventDispatcher();
@@ -71,13 +72,12 @@
             setTimeout(()=>{
                 holdingElement = $draggingElement;
                 placeholder.appendChild(holdingElement)
-            }, 200)
+            }, BACK_AMINATION_SPEED)
             dispatch('receive', {
                 element: $draggingElement
             });
         }
     }
-
     // When dragging element entered the field
    
 
