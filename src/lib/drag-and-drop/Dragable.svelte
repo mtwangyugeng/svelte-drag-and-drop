@@ -61,13 +61,14 @@ const endMove = () => {
             pY = $focusedField.phY
             
         }
+        dragging.set(null);
+        goingBack = true;
+        setTimeout(()=>{
+            goingBack = false;
+            isMoving = false;
+        }, BACK_AMINATION_SPEED)
     }
-    dragging.set(null);
-    goingBack = true;
-    setTimeout(()=>{
-        goingBack = false;
-        isMoving = false;
-    }, BACK_AMINATION_SPEED)
+    
 }
 
 // drag-drop
@@ -102,16 +103,17 @@ const setDragging = () => {
     }
     span{
         user-select: none;
+        position: static;
     }
 
     .Dragging {
-        position: absolute;
+        position: fixed;
         z-index: 99;
     }
 
     .GoBack {
         /* position: relative; */
-        position: absolute;
+        position: fixed;
         transition: all 0.2s ease;
         transition-property: top, left;
     }
