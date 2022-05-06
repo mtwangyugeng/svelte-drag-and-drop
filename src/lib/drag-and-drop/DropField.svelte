@@ -1,11 +1,17 @@
 <script context="module">
     import {writable} from 'svelte/store'
 
+    import {dragging} from './Dragable.svelte'
+    
+
+
     export const nextId = writable(0);
 
     // last entered element
     export const focusedField = writable(null);
     export const lastFocusedField = writable(null);
+
+    export const startFocusedField = writable(null)
     /**
      * isCollide:
      * https://codepen.io/mixal_bl4/pen/qZYWOm
@@ -26,14 +32,14 @@
     /**
      * the Dropfield must know the exact element droped in
      */
-    import {dragging, draggingElement} from "./Dragable.svelte";
+    import {draggingElement} from "./Dragable.svelte";
     import {createEventDispatcher} from 'svelte';
 import { BACK_AMINATION_SPEED } from './const';
    
     export let enabled = true;
 
     const dispatch = createEventDispatcher();
-    $: focused = id === $focusedField?.id && enabled;
+    $: focused = (id === $focusedField?.id) && enabled;
 
     // 1. focus the dropfield
     dragging.subscribe((v)=>{
@@ -43,6 +49,7 @@ import { BACK_AMINATION_SPEED } from './const';
             if(isCollide(v, info)){ 
                 console.log($focusedField?.id, $lastFocusedField?.id, info.id)
                 if ($focusedField?.id !== info.id && $lastFocusedField?.id !== info.id){
+                    console.log("changed")
                     lastFocusedField.set($focusedField)
                     focusedField.set(info)
 
@@ -54,19 +61,43 @@ import { BACK_AMINATION_SPEED } from './const';
                 if($lastFocusedField?.id === info.id || !$focusedField ) {
                     lastFocusedField.set(null)
                 }
+
+                // lastFocusedField.update(v=>{
+                //     // console.log($focusedField?.id, info.id)
+                //     if(v?.id === info.id || !$focusedField){
+                //         return null;
+                //     } else {
+                //         return v;
+                //     }
+                // })
+
                 if($focusedField?.id === info.id ) {
+                    console.log($focusedField?.id, info.id)
                     focusedField.set(null)
                 }
+                // focusedField.update(v=>{
+                //     // console.log($focusedField?.id, info.id)
+                //     if(v?.id === info.id){
+                //         return null;
+                //     } else {
+                //         return v;
+                //     }
+                // })
             }
         } else {
             if ( focused) {
                 setTimeout(()=>{
+                    focusedField.set(null);
+                    lastFocusedField.set(null);
                     placeholder.appendChild($draggingElement)
                 }, BACK_AMINATION_SPEED)
                 dispatch('receive', {
                     element: $draggingElement
                 });
-            }
+            } 
+            // how to tell if the field lost a element
+            // if dragging element was the child of the field
+            //   and element
         }
     })
      
@@ -92,7 +123,7 @@ import { BACK_AMINATION_SPEED } from './const';
     }
 
     const iniInfo = () => {
-        console.log("IniInfo")
+        // console.log("IniInfo")
         const bodyRect = span.getBoundingClientRect();
         pX = bodyRect.left;
         pY = bodyRect.top;

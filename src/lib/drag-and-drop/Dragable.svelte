@@ -40,13 +40,15 @@ const initiateMove = (e) => {
     const bodyRect = span.getBoundingClientRect();
     originX = bodyRect.left;
     originY = bodyRect.top;
+
+    setDragging()
 }
 let goingBack = false;
 const moveAround = (e) => {
     if (isMoving && !goingBack){
         pX = e.clientX - spanWidth;
         pY = e.clientY - spanHeight;
-        draggingElement.set(span)
+        
         setDragging()
     }
 }
@@ -79,6 +81,7 @@ const setDragging = () => {
         width: span.offsetWidth,
         height: span.offsetHeight,
     })
+    draggingElement.set(span)
     // runCheckCollision()
 }
 
