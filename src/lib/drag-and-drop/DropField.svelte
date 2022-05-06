@@ -41,12 +41,17 @@ import { BACK_AMINATION_SPEED } from './const';
     const dispatch = createEventDispatcher();
     $: focused = (id === $focusedField?.id) && enabled;
 
+
+    let info;
     // 1. focus the dropfield
     dragging.subscribe((v)=>{
         
         if(v) {
             iniInfo();
             if(isCollide(v, info)){ 
+                if(!$startFocusedField) {
+                    startFocusedField.set(info);
+                }
                 console.log($focusedField?.id, $lastFocusedField?.id, info.id)
                 if ($focusedField?.id !== info.id && $lastFocusedField?.id !== info.id){
                     console.log("changed")
@@ -62,30 +67,13 @@ import { BACK_AMINATION_SPEED } from './const';
                     lastFocusedField.set(null)
                 }
 
-                // lastFocusedField.update(v=>{
-                //     // console.log($focusedField?.id, info.id)
-                //     if(v?.id === info.id || !$focusedField){
-                //         return null;
-                //     } else {
-                //         return v;
-                //     }
-                // })
-
                 if($focusedField?.id === info.id ) {
                     console.log($focusedField?.id, info.id)
                     focusedField.set(null)
                 }
-                // focusedField.update(v=>{
-                //     // console.log($focusedField?.id, info.id)
-                //     if(v?.id === info.id){
-                //         return null;
-                //     } else {
-                //         return v;
-                //     }
-                // })
             }
         } else {
-            if ( focused) {
+            if (focused) {
                 setTimeout(()=>{
                     focusedField.set(null);
                     lastFocusedField.set(null);
@@ -95,6 +83,18 @@ import { BACK_AMINATION_SPEED } from './const';
                     element: $draggingElement
                 });
             } 
+
+            if($startFocusedField?.id === info?.id) {
+                startFocusedField.set(null);
+                if (focused) {
+                    
+                }else {
+                    console.log("lose", info?.id)
+                    dispatch('lose', {
+                        element: $draggingElement
+                    });
+                }
+            }
             // how to tell if the field lost a element
             // if dragging element was the child of the field
             //   and element
@@ -107,7 +107,7 @@ import { BACK_AMINATION_SPEED } from './const';
     let span;
     let placeholder;
 
-    let info;
+    
 
      let pX;
      let pY;
