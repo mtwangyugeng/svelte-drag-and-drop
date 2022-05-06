@@ -37,7 +37,9 @@ import { BACK_AMINATION_SPEED } from './const';
 
     // 1. focus the dropfield
     dragging.subscribe((v)=>{
+        
         if(v) {
+            iniInfo();
             if(isCollide(v, info)){ 
                 console.log($focusedField?.id, $lastFocusedField?.id, info.id)
                 if ($focusedField?.id !== info.id && $lastFocusedField?.id !== info.id){
@@ -116,7 +118,7 @@ import { BACK_AMINATION_SPEED } from './const';
 
 </script>
 
-<svelte:window on:scroll|capture={iniInfo} on:resize={iniInfo}/>
+
 <section 
     bind:this={span} 
     class:Focused = {focused && $dragging}

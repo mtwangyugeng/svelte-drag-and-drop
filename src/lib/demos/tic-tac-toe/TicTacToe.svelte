@@ -19,7 +19,7 @@ const changeGrid = (i, j) => {
 </script>
 
 <section>
-    <SmallScreen board = {board} />
+<SmallScreen board = {board} />
 <DropField>
     <Dragable loadValue="O">
         <button>
