@@ -33,7 +33,7 @@
      * the Dropfield must know the exact element droped in
      */
     import {draggingElement} from "./Dragable.svelte";
-    import {createEventDispatcher} from 'svelte';
+    import {createEventDispatcher, onMount} from 'svelte';
 import { BACK_AMINATION_SPEED } from './const';
    
     export let enabled = true;
@@ -120,10 +120,10 @@ import { BACK_AMINATION_SPEED } from './const';
     let id = $nextId;
     nextId.update( v => v + 1 )
 
-    $: if(span){
-        iniInfo()
-    }
 
+    onMount (()=>{
+        iniInfo()
+    })
     const iniInfo = () => {
         // console.log("IniInfo")
         const bodyRect = span.getBoundingClientRect();

@@ -3,7 +3,6 @@ import TicTacToe from './lib/demos/tic-tac-toe/TicTacToe.svelte';
 </script>
 
 <main>
-	.
 	<TicTacToe />
 </main>
 

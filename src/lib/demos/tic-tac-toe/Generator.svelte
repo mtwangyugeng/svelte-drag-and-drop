@@ -36,6 +36,5 @@ const generate = () => {
         background-color: red;
         width: 50px;
         height: 50px;
-        user-select: none;
     }
 </style>

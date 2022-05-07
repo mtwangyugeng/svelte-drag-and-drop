@@ -1,8 +1,10 @@
 <script>
+import Curtain from "./Curtain.svelte";
 import Generator from "./Generator.svelte";
     import Grid from "./Grid.svelte";
 import SmallScreen from "./SmallScreen.svelte";
 
+    let turn = "O"
     let board = [
         [null, null, null],
         [null, null, null],
@@ -34,7 +36,7 @@ import SmallScreen from "./SmallScreen.svelte";
     }
     $: winner = checkWin(board);
 
-    let turn = "O"
+
 
 const changeGrid = (i, j) => {
     if(turn === "O") {
@@ -47,7 +49,20 @@ const changeGrid = (i, j) => {
     }
 }
 
+const reset = () => {
+    turn = "O"
+    board = [
+        [null, null, null],
+        [null, null, null],
+        [null, null, null]
+    ]
+}
+
 </script>
+
+{#if true}
+<Curtain reset={reset} winner={winner}/>
+{/if}
 
 <section>
 <SmallScreen board = {board} winner={winner}/>
@@ -71,8 +86,9 @@ const changeGrid = (i, j) => {
 
 <style>
     section {
-        margin: 200px;
         background-color: blue;
+        height: 100%;
+        user-select: none;
     }
 
     .Row {
