@@ -52,9 +52,9 @@ import { BACK_AMINATION_SPEED } from './const';
                 if(!$startFocusedField) {
                     startFocusedField.set(info);
                 }
-                console.log($focusedField?.id, $lastFocusedField?.id, info.id)
+                // console.log($focusedField?.id, $lastFocusedField?.id, info.id)
                 if ($focusedField?.id !== info.id && $lastFocusedField?.id !== info.id){
-                    console.log("changed")
+                    // console.log("changed")
                     lastFocusedField.set($focusedField)
                     focusedField.set(info)
 
@@ -90,7 +90,7 @@ import { BACK_AMINATION_SPEED } from './const';
                     
                 }else {
                     if ($focusedField){
-                        console.log("lose", info?.id)
+                        // console.log("lose", info?.id)
                         dispatch('lose', {
                             element: $draggingElement
                         });
@@ -162,7 +162,9 @@ import { BACK_AMINATION_SPEED } from './const';
     
         <slot />
     </div>
-    
+    {#if !enabled}
+        <div class=Cover></div>
+    {/if}
 </section>
 
 
@@ -182,9 +184,16 @@ import { BACK_AMINATION_SPEED } from './const';
         width: 100px;
         /* margin: 100px; */
         border: 1px solid black;
-        
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .Cover {
+        z-index: 9999;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background-color: rgba(255, 192, 203, 0.575);
     }
 </style>

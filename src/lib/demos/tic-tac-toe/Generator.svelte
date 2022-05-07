@@ -1,7 +1,9 @@
 <script>
-    import Dragable from "../../drag-and-drop/Dragable.svelte";
-    import DropField from "../../drag-and-drop/DropField.svelte";
+import Dragable from "../../drag-and-drop/Dragable.svelte";
+import DropField from "../../drag-and-drop/DropField.svelte";
 
+export let turn;
+export let symbol;
 let ids = [0]
 
 const generate = () => {
@@ -18,11 +20,11 @@ const generate = () => {
 
 </script>
 
-<DropField on:lose={generate}>
+<DropField on:lose={generate} enabled={turn === symbol}>
     {#each ids as id (id)}
-        <Dragable loadValue="O">
+        <Dragable loadValue={symbol}>
             <button>
-                O
+                {symbol}
             </button>
         </Dragable>
     {/each}
@@ -34,5 +36,6 @@ const generate = () => {
         background-color: red;
         width: 50px;
         height: 50px;
+        user-select: none;
     }
 </style>

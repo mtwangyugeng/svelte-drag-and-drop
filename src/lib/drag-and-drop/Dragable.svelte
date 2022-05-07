@@ -27,7 +27,7 @@ $: if(span) {
     spanWidth = span.offsetWidth / 2
     spanHeight = span.offsetHeight / 2
     span.attributes.loadValue = loadValue
-    console.log(span.attributes.loadValue)
+    // console.log(span.attributes.loadValue)
 }
 
 let isMoving = false;

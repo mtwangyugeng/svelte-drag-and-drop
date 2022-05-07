@@ -1,5 +1,6 @@
 <script>
     export let board;
+    export let winner;
     export let message = "Hi mom"
 </script>
 
@@ -14,7 +15,7 @@
         </div>
     {/each}
     </div>
-    <div class="Message">{message}</div>
+    <div class="Message">{winner}</div>
 </section>
 
 
