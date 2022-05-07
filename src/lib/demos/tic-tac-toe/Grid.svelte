@@ -8,7 +8,7 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
     const handleRecieve = (e) => {
         const receivedElement = e.detail.element
         changeGrid(receivedElement.attributes.loadValue)
-        // isCovered = true;
+        isCovered = true;
     }
 </script>
 

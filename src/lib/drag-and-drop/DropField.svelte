@@ -46,7 +46,7 @@ import { BACK_AMINATION_SPEED } from './const';
     // 1. focus the dropfield
     dragging.subscribe((v)=>{
         
-        if(v) {
+        if(v && enabled) {
             iniInfo();
             if(isCollide(v, info)){ 
                 if(!$startFocusedField) {
@@ -89,10 +89,12 @@ import { BACK_AMINATION_SPEED } from './const';
                 if (focused) {
                     
                 }else {
-                    console.log("lose", info?.id)
-                    dispatch('lose', {
-                        element: $draggingElement
-                    });
+                    if ($focusedField){
+                        console.log("lose", info?.id)
+                        dispatch('lose', {
+                            element: $draggingElement
+                        });
+                    }
                 }
             }
             // how to tell if the field lost a element
