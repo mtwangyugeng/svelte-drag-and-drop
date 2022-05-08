@@ -33,7 +33,8 @@
 
 
         border-radius: 8px;
-        width: 280px;
+        max-width: 280px;
+        width: 90vw;
         height: 100px;
     }
 

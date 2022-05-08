@@ -63,6 +63,20 @@ $: reset(ini)
         height:500px;
         background-color: pink;
     }
+    @media (max-width: 500px) {
+        section {
+            width: 90vw;
+            height: 50px;
+        }
+        .Droping :global(.Placeholder) {
+            animation: none;
+        }
+        section :global(.Placeholder) {
+            position: relative;
+            top: 0%;
+        }
+    }
+
     button {
         background-color: red;
         width: 50px;

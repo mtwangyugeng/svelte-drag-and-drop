@@ -108,6 +108,14 @@ const reset = () => {
         justify-content: center;
         align-items: center;
     }
+    @media (max-width: 500px) {
+        .TicTacToe {
+            flex-direction: column;
+        }
+        h1 {
+            display: none;
+        }
+    }
     .Board {
         margin: 10px;
     }

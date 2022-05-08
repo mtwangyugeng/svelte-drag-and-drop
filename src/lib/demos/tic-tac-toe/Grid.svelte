@@ -26,8 +26,10 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
     .Grid {
         position: relative;
         background-color: rgb(255, 145, 0);
-        height: 100px;
-        width: 100px;
+        max-height: 100px;
+        height: 25vw;
+        max-width: 100px;
+        width: 25vw;
         margin: 5px;
         border-radius: 5px;
     }
@@ -46,8 +48,14 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
         height: 50px;
         border-radius: 50%;
         background: white;
+
+        animation: expand 0.2s;
     }
 
+    @keyframes expand {
+       from {width: 0px}
+       to {width: 50px}
+    }
     /* .Cover {
         z-index: 9999;
         height: 100%;
