@@ -44,15 +44,19 @@ import { BACK_AMINATION_SPEED } from './const';
     $: getFocus(focused)
 
     let info;
+
+    const handleClick = () => {
+        if(!$startFocusedField) {
+            startFocusedField.set(info);
+        }
+    }
     // 1. focus the dropfield
     dragging.subscribe((v)=>{
         
         if(v && enabled) {
             iniInfo();
             if(isCollide(v, info)){ 
-                if(!$startFocusedField) {
-                    startFocusedField.set(info);
-                }
+                
                 // console.log($focusedField?.id, $lastFocusedField?.id, info.id)
                 if ($focusedField?.id !== info.id && $lastFocusedField?.id !== info.id){
                     // console.log("changed")
@@ -160,6 +164,7 @@ import { BACK_AMINATION_SPEED } from './const';
     >
     <span class="Placeholder"
         bind:this={placeholder}
+        on:mousedown={handleClick}
     >
     
         <slot />

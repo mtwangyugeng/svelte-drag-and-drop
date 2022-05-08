@@ -25,10 +25,11 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
 <style>
     .Grid {
         position: relative;
-        background-color: yellow;
+        background-color: rgb(255, 145, 0);
         height: 100px;
         width: 100px;
-        border: 1px solid black;
+        margin: 5px;
+        border-radius: 5px;
     }
     .Focusing {
         background-color: green;

@@ -59,7 +59,7 @@ $: reset(ini)
 
 
     section {
-        width: 500px;
+        width: 50px;
         height:500px;
         background-color: pink;
     }

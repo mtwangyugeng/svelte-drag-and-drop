@@ -7,13 +7,14 @@ import TicTacToe from './lib/demos/tic-tac-toe/TicTacToe.svelte';
 </main>
 
 <style>
+
   main {
 	  position: relative;
 		height: 100vh;
-    background-color: #777;
+    background-color: rgb(214, 139, 0);
 		font-family: Arial, Helvetica, sans-serif;
 
-		overflow: auto;
+		overflow: hidden;
 	}
 
 	:global(*) {

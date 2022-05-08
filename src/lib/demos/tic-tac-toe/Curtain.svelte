@@ -82,6 +82,7 @@ const handleClick = () => {
         width: 100%;
         z-index: 999999;
         position: fixed;
-
+        top: 0;
+        left: 0;
     }
 </style>

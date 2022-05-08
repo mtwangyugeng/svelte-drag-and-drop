@@ -10,6 +10,8 @@ import SmallScreen from "./SmallScreen.svelte";
         [null, null, null],
         [null, null, null]
     ]
+    let xScore = 0;
+    let OScore = 0;
     /**
      *  if a side is won, return the symbol of the side,
      *  o/w 
@@ -67,35 +69,48 @@ const reset = () => {
 {/if}
 
 <section>
-<SmallScreen board = {board} winner={winner} turn={turn}/>
+    <h1>Svelte-Drag-Drop Demo: Tic Tac Toe</h1>
+    <SmallScreen board = {board} winner={winner} turn={turn}/>
 
-<div class=TicTacToe>
-    <Generator symbol=O turn={turn} ini={ini}/>
+    <div class=TicTacToe>
+        <Generator symbol=O turn={turn} ini={ini}/>
 
 
-    <div class="Board">
-    {#each board as row,i (i)}
-        <div class="Row">
-            {#each row as grid,j (j)}
-                <Grid changeGrid={changeGrid(i, j)} grid={grid}/>
-            {/each}
+        <div class="Board">
+        {#each board as row,i (i)}
+            <div class="Row">
+                {#each row as grid,j (j)}
+                    <Grid changeGrid={changeGrid(i, j)} grid={grid}/>
+                {/each}
+            </div>
+        {/each}
         </div>
-    {/each}
+
+        <Generator symbol=X turn={turn} ini={ini}/>
+
     </div>
-
-    <Generator symbol=X turn={turn} ini={ini}/>
-
-</div>
 
 </section>
 
 <style>
+    h1 {
+		text-align: center;
+		padding: 20px;
+		color: #fff;
+	}
     section {
-        background-color: blue;
-        height: 100%;
-        user-select: none;
-    }
+        background-color: rgb(240, 160, 56);
+        height: 100vh;
 
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .Board {
+        margin: 10px;
+    }
     .Row {
         display: flex
     }
