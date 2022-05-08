@@ -1,18 +1,44 @@
 <script>
 export let winner = "O"
 export let reset;
+
+let curtainUp;
+const handleClick = () => {
+    curtainUp = true;
+    setTimeout(()=>{
+        reset();
+        curtainUp = false;
+    }, 500)
+}
 </script>
 
-<section>
+<section class:CurtainUp={curtainUp}>
     <div class=Window>
-        Player {winner} win!
-        <button class=Reset on:click={reset}>reset</button>
+        <div class=Message>Player {winner} win!</div>
+        <button class=Reset on:click={handleClick}>reset</button>
     </div>
 </section>
 
 
 <style>
-    
+    .CurtainUp {
+        animation: curtainUp 0.5s;
+        animation-timing-function: ease-in;
+        animation-fill-mode: forwards;
+    }
+    @keyframes curtainUp {
+        0% {top: 0%;}
+        100% {top: -100%;}
+    }
+
+    .Reset {
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        bottom: -25px;
+
+        background-color: white;
+    }
     .Window {
         background-color: pink;
         width: 500px;
@@ -21,12 +47,13 @@ export let reset;
         left: 50%;
 
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-
+        transform: translate(-50%,-50%);
         
-        animation: shake 0.5s;
-        animation-timing-function: ease;
+        animation: downShake 0.5s;
+        /* animation-timing-function: ease; */
         animation-fill-mode: forwards;
     }
 
@@ -35,16 +62,18 @@ export let reset;
             height: 100%;
             width: 100%;
         }
+        .Reset {
+            position: static;
+        }
     }
-    @keyframes shake {
-        from {
-            top: -100%;
-            transform: translate(-50%,-50%);
-        }
-        to {
-            top: 50%;
-            transform: translate(-50%,-50%);
-        }
+    @keyframes downShake {
+        0% {top: -100%;}
+        50% {top: 50%;}
+        60% {top: 51%;}
+        70% {top: 49%;}
+        80% {top: 50.5%;}
+        90% {top: 49.5%;}
+        100% {top: 50%;}
     }
 
     section {

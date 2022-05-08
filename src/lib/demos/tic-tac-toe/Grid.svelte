@@ -3,17 +3,16 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
 
     export let changeGrid;
 
-    let enabled = true;
+    export let grid;
     // The grid need to know what dropped in fully.
     const handleRecieve = (e) => {
         const receivedElement = e.detail.element
         changeGrid(receivedElement.attributes.loadValue)
-        enabled = false;
     }
 </script>
 
 <div class = Grid>
-<DropField on:receive = {handleRecieve} enabled={enabled}>
+<DropField on:receive = {handleRecieve} enabled={!grid}>
 
 </DropField>
 </div>

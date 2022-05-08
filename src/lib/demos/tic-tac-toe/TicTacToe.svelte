@@ -39,6 +39,7 @@ import SmallScreen from "./SmallScreen.svelte";
 
 
 const changeGrid = (i, j) => {
+    ini = false;
     if(turn === "O") {
         turn = "X"
     } else {
@@ -49,7 +50,9 @@ const changeGrid = (i, j) => {
     }
 }
 
+let ini = true;
 const reset = () => {
+    ini = true;
     turn = "O"
     board = [
         [null, null, null],
@@ -60,7 +63,7 @@ const reset = () => {
 
 </script>
 
-{#if true}
+{#if winner}
 <Curtain reset={reset} winner={winner}/>
 {/if}
 
@@ -69,17 +72,18 @@ const reset = () => {
 
 <div class=TicTacToe>
     <Generator symbol=O turn={turn}/>
+
     <div class="Board">
     {#each board as row,i (i)}
         <div class="Row">
             {#each row as grid,j (j)}
-                <Grid changeGrid={changeGrid(i, j)}/>
+                <Grid changeGrid={changeGrid(i, j)} grid={grid}/>
             {/each}
         </div>
     {/each}
     </div>
 
-    <Generator symbol=X turn={turn}/>
+    <Generator symbol=X turn={turn} />
 </div>
 
 </section>

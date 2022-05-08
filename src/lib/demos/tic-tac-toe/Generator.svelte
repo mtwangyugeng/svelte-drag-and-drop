@@ -16,8 +16,6 @@ const generate = () => {
 }
 
 
-
-
 </script>
 
 <DropField on:lose={generate} enabled={turn === symbol}>
