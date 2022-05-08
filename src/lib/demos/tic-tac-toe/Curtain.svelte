@@ -69,6 +69,7 @@ const handleClick = () => {
         color: white;
         font-size: 20px;
         font-weight: bold;
+        user-select: none;
         /* margin-bottom: 10px; */
     }
 
