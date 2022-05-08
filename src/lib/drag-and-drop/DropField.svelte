@@ -155,12 +155,12 @@ import { BACK_AMINATION_SPEED } from './const';
     bind:this={span} 
     class:Focused = {focused && $dragging}
     >
-    <div class="Placeholder"
+    <span class="Placeholder"
         bind:this={placeholder}
     >
     
         <slot />
-    </div>
+</span>
     {#if !enabled}
         <div class=Cover></div>
     {/if}
@@ -172,27 +172,27 @@ import { BACK_AMINATION_SPEED } from './const';
         background-color: green;
     }
     .Placeholder {
-        width: 50px;
+        /* width: 50px;
         height: 50px;
-        background: white;
+        background: white; */
     }
 
+
     section {
-        background-color: yellow;
-        height: 100px;
-        width: 100px;
-        /* margin: 100px; */
-        border: 1px solid black;
+        width: 100%;
+        height: 100%;
         position: relative;
-        display: flex;
+        /* display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: center; */
     }
     .Cover {
         z-index: 9999;
         height: 100%;
         width: 100%;
         position: absolute;
+        top: 0;
+        left: 0;
         background-color: rgba(255, 192, 203, 0.575);
     }
 </style>
