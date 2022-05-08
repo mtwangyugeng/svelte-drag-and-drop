@@ -39,7 +39,6 @@ import SmallScreen from "./SmallScreen.svelte";
 
 
 const changeGrid = (i, j) => {
-    ini = false;
     if(turn === "O") {
         turn = "X"
     } else {
@@ -52,7 +51,7 @@ const changeGrid = (i, j) => {
 
 let ini = true;
 const reset = () => {
-    ini = true;
+    ini = !ini;
     turn = "O"
     board = [
         [null, null, null],
@@ -68,10 +67,12 @@ const reset = () => {
 {/if}
 
 <section>
-<SmallScreen board = {board} winner={winner}/>
+<SmallScreen board = {board} winner={winner} turn={turn}/>
 
 <div class=TicTacToe>
+    {#key ini}
     <Generator symbol=O turn={turn}/>
+    {/key}
 
     <div class="Board">
     {#each board as row,i (i)}
@@ -83,7 +84,9 @@ const reset = () => {
     {/each}
     </div>
 
+    {#key ini}
     <Generator symbol=X turn={turn} />
+    {/key}
 </div>
 
 </section>

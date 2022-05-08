@@ -1,7 +1,10 @@
 <script>
     export let board;
     export let winner;
-    export let message = "Hi mom"
+    export let turn;
+    
+    $: message = winner? "The winner is " + winner + " !" : 
+                        "It is " + turn + "'s turn."
 </script>
 
 
@@ -15,17 +18,15 @@
         </div>
     {/each}
     </div>
-    <div class="Message">{winner}</div>
+    <div class="Message">{message}</div>
 </section>
 
 
 <style>
-    @import url('http://fonts.cdnfonts.com/css/led-digital-7');
     section {
         padding: 10px;
         background-color: rgb(46, 122, 80);
-        font-family: 'LED Digital 7', sans-serif;
-
+        font-family: "Lucida Console", "Courier New", monospace;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -39,9 +40,10 @@
     .Message {
         background-color: rgb(62, 133, 94);
         width: 150px;
-        height: 30px;
+        height: 45px;
         padding: 5px;
         overflow: hidden;
+        text-align: center;
     }
 
     .Board {
