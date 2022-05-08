@@ -15,10 +15,16 @@ const generate = () => {
     ids = [...ids, ids[ids.length - 1] + 1]
 }
 
+const reset = (ini) => {
+    ids = [0]
+}
 
+export let ini;
+$: reset(ini)
 </script>
 
 <DropField on:lose={generate} enabled={turn === symbol}>
+    {#key ini}
     {#each ids as id (id)}
         <Dragable loadValue={symbol}>
             <button>
@@ -26,6 +32,7 @@ const generate = () => {
             </button>
         </Dragable>
     {/each}
+    {/key}
 </DropField>
 
 

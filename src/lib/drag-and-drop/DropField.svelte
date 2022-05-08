@@ -41,7 +41,6 @@ import { BACK_AMINATION_SPEED } from './const';
     const dispatch = createEventDispatcher();
     $: focused = (id === $focusedField?.id) && enabled;
 
-
     let info;
     // 1. focus the dropfield
     dragging.subscribe((v)=>{
@@ -90,7 +89,7 @@ import { BACK_AMINATION_SPEED } from './const';
                     
                 }else {
                     if ($focusedField){
-                        // console.log("lose", info?.id)
+                        console.log("lose", info?.id)
                         dispatch('lose', {
                             element: $draggingElement
                         });
@@ -105,8 +104,8 @@ import { BACK_AMINATION_SPEED } from './const';
      
     // When dragging element entered the field
    
-
     let span;
+
     let placeholder;
 
     
@@ -124,6 +123,7 @@ import { BACK_AMINATION_SPEED } from './const';
     onMount (()=>{
         iniInfo()
     })
+
     const iniInfo = () => {
         // console.log("IniInfo")
         const bodyRect = span.getBoundingClientRect();
@@ -150,7 +150,6 @@ import { BACK_AMINATION_SPEED } from './const';
     }
 
 </script>
-
 
 <section 
     bind:this={span} 
