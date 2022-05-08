@@ -1,9 +1,12 @@
 <script>
+import { dragging } from "$src/lib/drag-and-drop/Dragable.svelte";
+
 import DropField from "$src/lib/drag-and-drop/DropField.svelte";
 
     export let changeGrid;
-
+    
     export let grid;
+    let isFocusing = false;
     // The grid need to know what dropped in fully.
     const handleRecieve = (e) => {
         const receivedElement = e.detail.element
@@ -11,9 +14,9 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
     }
 </script>
 
-<div class = Grid>
-<DropField on:receive = {handleRecieve} enabled={!grid}>
-    {#if !grid}
+<div class = Grid class:Focusing={isFocusing}>
+<DropField on:receive = {handleRecieve} enabled={!grid} getFocus={(focus)=> isFocusing = focus}>
+    {#if !grid && $dragging}
     <div class=Placeholder></div>
     {/if}
 </DropField>
@@ -27,6 +30,9 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
         width: 100px;
         border: 1px solid black;
     }
+    .Focusing {
+        background-color: green;
+    }
 
     .Grid > :global(*) {
         display: flex;
@@ -37,6 +43,7 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
     .Placeholder {
         width: 50px;
         height: 50px;
+        border-radius: 50%;
         background: white;
     }
 

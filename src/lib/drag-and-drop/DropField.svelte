@@ -38,8 +38,10 @@ import { BACK_AMINATION_SPEED } from './const';
    
     export let enabled = true;
 
+    export let getFocus = (focus) => {}
     const dispatch = createEventDispatcher();
     $: focused = (id === $focusedField?.id) && enabled;
+    $: getFocus(focused)
 
     let info;
     // 1. focus the dropfield
@@ -151,9 +153,10 @@ import { BACK_AMINATION_SPEED } from './const';
 
 </script>
 
+<!-- class:Focused = {focused && $dragging} -->
 <section 
     bind:this={span} 
-    class:Focused = {focused && $dragging}
+    
     >
     <span class="Placeholder"
         bind:this={placeholder}
@@ -168,23 +171,14 @@ import { BACK_AMINATION_SPEED } from './const';
 
 
 <style>
-    .Focused {
+    /* .Focused {
         background-color: green;
-    }
-    .Placeholder {
-        /* width: 50px;
-        height: 50px;
-        background: white; */
-    }
-
+    } */
 
     section {
         width: 100%;
         height: 100%;
         position: relative;
-        /* display: flex;
-        justify-content: center;
-        align-items: center; */
     }
     .Cover {
         z-index: 9999;

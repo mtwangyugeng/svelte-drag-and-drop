@@ -6,13 +6,11 @@ export let turn;
 export let symbol;
 let ids = [0]
 
+let isDroping = false
 const generate = () => {
-    // const neo = {...toGenerate}
-    // container.appendChild(neo)
-    // console.log(toGenerate)
-    // const neo = toGenerate.cloneNode(true);
-    // container.appendChild(neo);
     ids = [...ids, ids[ids.length - 1] + 1]
+    isDroping = true;
+    setTimeout(()=>{isDroping = false}, 200)
 }
 
 const reset = (ini) => {
@@ -23,23 +21,52 @@ export let ini;
 $: reset(ini)
 </script>
 
+<section class:Droping={isDroping}>
 <DropField on:lose={generate} enabled={turn === symbol}>
-    {#key ini}
     {#each ids as id (id)}
-        <Dragable loadValue={symbol}>
-            <button>
-                {symbol}
-            </button>
-        </Dragable>
+            {#key ini}
+            <Dragable loadValue={symbol}>
+                <button>
+                    {symbol}
+                </button>
+            </Dragable>
+            {/key}
     {/each}
-    {/key}
 </DropField>
+</section>
 
 
 <style>
+    @keyframes curtainUp {
+        0% {top: 0%;}
+        100% {top: 50%;}
+    }
+
+    section > :global(*) {
+        display: flex;
+        justify-content: center;
+    }
+
+    .Droping :global(.Placeholder) {
+        
+        animation: curtainUp 0.2s;
+        animation-timing-function: ease-in;
+    }
+    section :global(.Placeholder) {
+        position: relative;
+        top: 50%;
+    }
+
+
+    section {
+        width: 500px;
+        height:500px;
+        background-color: pink;
+    }
     button {
         background-color: red;
         width: 50px;
         height: 50px;
+        border-radius: 50%;
     }
 </style>
