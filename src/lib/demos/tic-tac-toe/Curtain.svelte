@@ -15,7 +15,7 @@ const handleClick = () => {
 <section class:CurtainUp={curtainUp}>
     <div class=Window>
         <div class=Message>Player {winner} win!</div>
-        <button class=Reset on:click={handleClick}>reset</button>
+        <button class=Reset on:click={handleClick}>Play Again!</button>
     </div>
 </section>
 
@@ -33,14 +33,21 @@ const handleClick = () => {
 
     .Reset {
         height: 50px;
-        width: 50px;
+        width: 150px;
         position: absolute;
         bottom: -25px;
 
         background-color: white;
+        border-radius: 10PX;
+        color: rgb(224, 52, 0);
     }
+    .Reset:hover {
+        background-color: rgb(224, 52, 0);
+        color: white;
+    }
+
     .Window {
-        background-color: pink;
+        background-color: rgb(224, 120, 0);
         width: 500px;
         height: 200px;
         position: absolute;
@@ -55,6 +62,14 @@ const handleClick = () => {
         animation: downShake 0.5s;
         /* animation-timing-function: ease; */
         animation-fill-mode: forwards;
+        border-radius: 10px;
+    }
+
+    .Message {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        /* margin-bottom: 10px; */
     }
 
     @media (max-width: 500px) {
@@ -64,6 +79,9 @@ const handleClick = () => {
         }
         .Reset {
             position: static;
+        }
+        .Message {
+            margin-bottom: 10px;
         }
     }
     @keyframes downShake {

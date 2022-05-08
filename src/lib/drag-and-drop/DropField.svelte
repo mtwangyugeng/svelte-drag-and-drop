@@ -192,6 +192,6 @@ import { BACK_AMINATION_SPEED } from './const';
         position: absolute;
         top: 0;
         left: 0;
-        background-color: rgba(255, 192, 203, 0.575);
+        /* background-color: rgba(255, 192, 203, 0.575); */
     }
 </style>

@@ -10,8 +10,6 @@ import SmallScreen from "./SmallScreen.svelte";
         [null, null, null],
         [null, null, null]
     ]
-    let xScore = 0;
-    let OScore = 0;
     /**
      *  if a side is won, return the symbol of the side,
      *  o/w 
@@ -41,12 +39,13 @@ import SmallScreen from "./SmallScreen.svelte";
 
 
 const changeGrid = (i, j) => {
-    if(turn === "O") {
-        turn = "X"
-    } else {
-        turn = "O"
-    }
+    
     return (newValue)=>{
+        if(turn === "O") {
+            turn = "X"
+        } else {
+            turn = "O"
+        }
         board[i][j] = newValue;        
     }
 }
@@ -111,6 +110,7 @@ const reset = () => {
     @media (max-width: 500px) {
         .TicTacToe {
             flex-direction: column;
+            margin-top: 10px;
         }
         h1 {
             display: none;
