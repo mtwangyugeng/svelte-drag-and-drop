@@ -14,7 +14,7 @@ const handleClick = () => {
 
 <section class:CurtainUp={curtainUp}>
     <div class=Window>
-        <div class=Message>Player {winner} win!</div>
+        <div class=Message>{(winner === 'Draw')? winner: ('Player ' + winner + ' win!')}</div>
         <button class=Reset on:click={handleClick}>Play Again!</button>
     </div>
 </section>

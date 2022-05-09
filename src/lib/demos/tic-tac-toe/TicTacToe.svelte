@@ -16,8 +16,9 @@ import SmallScreen from "./SmallScreen.svelte";
      */
     const checkWin = (board) => {
         // check rows & cols
+        let draw = true;
         for (let i = 0; i < 3; i++){
-            console.log(i)
+            draw =  draw && board[0][i] && board[1][i] && board[2][i];
             if (board[i][0] && board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
                 return board[i][0]
             }
@@ -32,6 +33,12 @@ import SmallScreen from "./SmallScreen.svelte";
             ) {
                 return board[1][1]
             }
+        
+            console.log("hi " + draw)
+        if (draw) {
+            return "Draw"
+        }
+        
         return null;
     }
     $: winner = checkWin(board);
