@@ -2,6 +2,7 @@
 import { dragging } from "$src/lib/drag-and-drop/Dragable.svelte";
 
 import DropField from "$src/lib/drag-and-drop/DropField.svelte";
+import Peice from "../Peice.svelte";
 
     export let changeGrid;
     
@@ -18,6 +19,10 @@ import DropField from "$src/lib/drag-and-drop/DropField.svelte";
 <DropField on:receive = {handleRecieve} enabled={!grid} getFocus={(focus)=> isFocusing = focus}>
     {#if !grid && $dragging}
     <div class=Placeholder></div>
+    {/if}
+
+    {#if grid}
+        <Peice {grid} />
     {/if}
 </DropField>
 </div>

@@ -60,13 +60,13 @@ import { BACK_AMINATION_SPEED } from './const';
         Drills deep in the darkness,
         all to fortify the base.
     */
-    // 1. focus the dropfield
     dragging.subscribe((v)=>{
-        
-        if(v && enabled) {
+        if(!enabled)
+            return
+
+        if(v) {
             iniInfo();
-            if(isCollide(v, info)){ 
-                
+            if(isCollide(v, info)) { 
                 // console.log($focusedField?.id, $lastFocusedField?.id, info.id)
                 if ($focusedField?.id !== info.id && $lastFocusedField?.id !== info.id){
                     // console.log("changed")
@@ -87,35 +87,36 @@ import { BACK_AMINATION_SPEED } from './const';
                     focusedField.set(null)
                 }
             }
-        } else {
-            if (focused) {
-                setTimeout(()=>{
-                    focusedField.set(null);
-                    lastFocusedField.set(null);
-                    placeholder.appendChild($draggingElement)
-                }, BACK_AMINATION_SPEED)
-                dispatch('receive', {
-                    element: $draggingElement
-                });
-            } 
+            return;
+        }
 
-            if($startFocusedField?.id === info?.id) {
-                startFocusedField.set(null);
-                if (focused) {
-                    
-                }else {
-                    if ($focusedField){
-                        console.log("lose", info?.id)
-                        dispatch('lose', {
-                            element: $draggingElement
-                        });
-                    }
+        // dragging is released
+        if (focused) {
+            setTimeout(()=>{
+                focusedField.set(null);
+                lastFocusedField.set(null);
+                dispatch('receive', {
+                element: $draggingElement
+                });
+                // placeholder.appendChild($draggingElement)
+            }, BACK_AMINATION_SPEED)
+
+        } 
+
+        if($startFocusedField?.id === info?.id) {
+            startFocusedField.set(null);
+            if (focused) {
+                
+            }else {
+                if ($focusedField){
+                    console.log("lose", info?.id)
+                    dispatch('lose', {
+                        element: $draggingElement
+                    });
                 }
             }
-            // how to tell if the field lost a element
-            // if dragging element was the child of the field
-            //   and element
         }
+
     })
      
     // When dragging element entered the field
@@ -134,7 +135,6 @@ import { BACK_AMINATION_SPEED } from './const';
 
     let id = $nextId;
     nextId.update( v => v + 1 )
-
 
     onMount (()=>{
         iniInfo()

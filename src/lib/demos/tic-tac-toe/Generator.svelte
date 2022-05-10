@@ -1,6 +1,7 @@
 <script>
 import Dragable from "../../drag-and-drop/Dragable.svelte";
 import DropField from "../../drag-and-drop/DropField.svelte";
+import Peice from "../Peice.svelte";
 
 export let turn;
 export let symbol;
@@ -32,9 +33,7 @@ $: if(turn === symbol){
     {#each ids as id (id)}
             {#key ini}
             <Dragable loadValue={symbol}>
-                <button>
-                    {symbol}
-                </button>
+                <Peice grid={symbol} />
             </Dragable>
             {/key}
     {/each}
@@ -83,10 +82,4 @@ $: if(turn === symbol){
         }
     }
 
-    button {
-        background-color: red;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-    }
 </style>
