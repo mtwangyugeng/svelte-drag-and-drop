@@ -1,7 +1,7 @@
 <script>
 import Dragable from "../../drag-and-drop/Dragable.svelte";
 import DropField from "../../drag-and-drop/DropField.svelte";
-import Peice from "../Peice.svelte";
+import Peice from "./Peice.svelte";
 
 export let turn;
 export let symbol;

@@ -2,7 +2,7 @@
 import { dragging } from "$src/lib/drag-and-drop/Dragable.svelte";
 
 import DropField from "$src/lib/drag-and-drop/DropField.svelte";
-import Peice from "../Peice.svelte";
+import Peice from "./Peice.svelte";
 
     export let changeGrid;
     
