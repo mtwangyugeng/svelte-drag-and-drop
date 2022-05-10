@@ -96,7 +96,7 @@ import { BACK_AMINATION_SPEED } from './const';
                 focusedField.set(null);
                 lastFocusedField.set(null);
                 dispatch('receive', {
-                element: $draggingElement
+                    element: $draggingElement
                 });
                 // placeholder.appendChild($draggingElement)
             }, BACK_AMINATION_SPEED)

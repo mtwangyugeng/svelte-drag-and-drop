@@ -20,41 +20,36 @@ $: if(turn === symbol){
 </script>
 
 <section class:Droping={isDroping}>
-<DropField enabled={turn === symbol}>
+<!-- <DropField enabled={turn === symbol}> -->
     {#if turn === symbol}
+    <span class=Dropping>
     <Dragable loadValue={symbol}>
         <Peice grid={symbol} />
     </Dragable>
+    </span>
     {/if}
-</DropField>
+<!-- </DropField> -->
 </section>
 
 
 <style>
     @keyframes curtainUp {
-        0% {top: -50%;}
-        100% {top: 0%;}
+        0% {transform: translateY(-300px);}
+        100% {transform: translateY(0px);}
     }
 
-    section > :global(*) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 
-    .Droping :global(.Placeholder) {
-        
+    .Dropping {
+        position: relative;
         animation: curtainUp 0.2s;
         animation-timing-function: ease-in;
     }
-    section :global(.Placeholder) {
-        position: relative;
-    }
-
 
     section {
         width: 50px;
         height:500px;
+        display:flex;
+        align-items: center;
         /* background-color: pink; */
     }
     @media (max-width: 500px) {

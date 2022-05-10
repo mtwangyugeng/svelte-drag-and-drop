@@ -5,7 +5,7 @@ Copy the [src/lib/drag-and-drop](https://github.com/mtwangyugeng/svelte-drag-and
 
 ``` javascript
 <div>
-    <DropField enabled={true}>
+    <DropField enabled={true} on:lose={handleLose} on:receive={handleRecieve} on:enter={handleEnter}>
         <Dragable loadValue={anyObject}>
             <button>
                 A dragable button.
