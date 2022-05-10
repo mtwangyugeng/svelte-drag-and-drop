@@ -79,7 +79,7 @@ const reset = () => {
     <SmallScreen board = {board} winner={winner} turn={turn}/>
 
     <div class=TicTacToe>
-        <Generator symbol=O turn={turn} ini={ini}/>
+        <Generator symbol=O turn={turn} />
 
 
         <div class="Board">
@@ -92,7 +92,7 @@ const reset = () => {
         {/each}
         </div>
 
-        <Generator symbol=X turn={turn} ini={ini}/>
+        <Generator symbol=X turn={turn} />
 
     </div>
 

@@ -11,32 +11,21 @@ let ids = []
 
 let isDroping = false
 const generate = () => {
-    ids = ids.length ? [...ids, ids[ids.length - 1] + 1] : [0]
     isDroping = true;
     setTimeout(()=>{isDroping = false}, 200)
 }
-
-const reset = (ini) => {
-    ids = []
-}
-
-export let ini;
-$: reset(ini)
 $: if(turn === symbol){
     generate()
-    ini;
 }
 </script>
 
 <section class:Droping={isDroping}>
 <DropField enabled={turn === symbol}>
-    {#each ids as id (id)}
-            {#key ini}
-            <Dragable loadValue={symbol}>
-                <Peice grid={symbol} />
-            </Dragable>
-            {/key}
-    {/each}
+    {#if turn === symbol}
+    <Dragable loadValue={symbol}>
+        <Peice grid={symbol} />
+    </Dragable>
+    {/if}
 </DropField>
 </section>
 
