@@ -1,22 +1,28 @@
 <script>
 import Dragable from "$src/lib/drag-and-drop/Dragable.svelte";
 import Card from "./Card.svelte";
-
-    export let card = null;
+    export let stack;
+    export let index;
 </script>
 
+
 <Dragable >
+    
 <section>
-    {#if card}
+   
         <div class=Card>
-            <Card card={card}/>
+            <Card card={index}/>
         </div>
-    {/if}
 
     <div class=Child>
-        <slot />
+        {#if stack.length - 1 < index}
+            {stack.length} {index}
+        {:else}
+            <svelte:self stack={stack} index={(index + 1)} />
+        {/if}
     </div>
 </section>
+    
 </Dragable>
 
 <style>

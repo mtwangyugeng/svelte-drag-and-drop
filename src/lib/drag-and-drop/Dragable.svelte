@@ -24,14 +24,13 @@ export let loadValue = "loadValue shouldn't be empty."
 
 // Change for the position of the cursor on the object.
 $: if(span) {
-    spanWidth = span.offsetWidth / 2
-    spanHeight = span.offsetHeight / 2
+    // spanWidth = span.offsetWidth / 2
+    // spanHeight = span.offsetHeight / 2
     span.attributes.loadValue = loadValue
     // console.log(span.attributes.loadValue)
 }
 
-const setMousePos = (clientX, clientY) => {
-    const bodyRect = span.getBoundingClientRect();
+const setMousePos = (bodyRect, clientX, clientY) => {
     spanWidth = clientX - bodyRect.left;
     spanHeight = clientY - bodyRect.top;
 }
@@ -39,21 +38,24 @@ const setMousePos = (clientX, clientY) => {
 let isMoving = false;
 
 const initiateMove = (e) => {
-    isMoving = true;
+    const bodyRect = span.getBoundingClientRect();
     if (e.type === "mousedown"){
-        setMousePos(e.clientX, e.clientY)
+        setMousePos(bodyRect, e.clientX, e.clientY)
         // pX = e.clientX - spanWidth;
         // pY = e.clientY - spanHeight;
     } else {
-        setMousePos(e.touches[0].clientX, e.touches[0].clientY)
+        setMousePos(bodyRect, e.touches[0].clientX, e.touches[0].clientY)
         // pX = e.touches[0].clientX - spanWidth;
         // pY = e.touches[0].clientY - spanHeight;
     }
 
-    const bodyRect = span.getBoundingClientRect();
+    
     originX = bodyRect.left;
     originY = bodyRect.top;
+    pX = originX;
+    pY = originY;
 
+    isMoving = true;
     setDragging()
 }
 let goingBack = false;
