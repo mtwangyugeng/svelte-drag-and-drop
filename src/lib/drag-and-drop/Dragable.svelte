@@ -30,16 +30,24 @@ $: if(span) {
     // console.log(span.attributes.loadValue)
 }
 
+const setMousePos = (clientX, clientY) => {
+    const bodyRect = span.getBoundingClientRect();
+    spanWidth = clientX - bodyRect.left;
+    spanHeight = clientY - bodyRect.top;
+}
+
 let isMoving = false;
 
 const initiateMove = (e) => {
     isMoving = true;
     if (e.type === "mousedown"){
-        pX = e.clientX - spanWidth;
-        pY = e.clientY - spanHeight;
+        setMousePos(e.clientX, e.clientY)
+        // pX = e.clientX - spanWidth;
+        // pY = e.clientY - spanHeight;
     } else {
-        pX = e.touches[0].clientX - spanWidth;
-        pY = e.touches[0].clientY - spanHeight;
+        setMousePos(e.touches[0].clientX, e.touches[0].clientY)
+        // pX = e.touches[0].clientX - spanWidth;
+        // pY = e.touches[0].clientY - spanHeight;
     }
 
     const bodyRect = span.getBoundingClientRect();
@@ -100,8 +108,8 @@ const setDragging = () => {
 
 <svelte:window on:mousemove={moveAround} on:touchmove={moveAround} on:mouseup={endMove} on:touchend={endMove}/>
 
-<span on:mousedown={initiateMove}
-    on:touchstart={initiateMove}
+<span on:mousedown|stopPropagation={initiateMove}
+    on:touchstart|stopPropagation={initiateMove}
     bind:this={span}
     class:Rigid = {!isMoving}
     class:Dragging = {isMoving}

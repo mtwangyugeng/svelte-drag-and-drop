@@ -1,9 +1,11 @@
 <script>
+import Solitaire from './lib/demos/Solitaire/Solitaire.svelte';
 import TicTacToe from './lib/demos/tic-tac-toe/TicTacToe.svelte';
 </script>
 
 <main>
-	<TicTacToe />
+	<!-- <TicTacToe /> -->
+	<Solitaire />
 </main>
 
 <style>
