@@ -9,11 +9,16 @@ let testArr =
 ]
 
 function handleRecieve(stackI) {
-    const neo = [...testArr]
-    const dc = neo[$dragging.stackI].splice($dragging.index)
-    console.log(dc)
-    neo[stackI] = neo[stackI].concat(dc)
-    testArr = neo
+    return () =>{
+        const neo = [...testArr]
+        const dc = neo[$dragging.stackI].splice($dragging.index)
+        console.log(dc)
+        neo[stackI] = neo[stackI].concat(dc)
+        console.log(stackI)
+        testArr = neo
+
+        dragging.set(null)
+    }
 }
 
 </script>
