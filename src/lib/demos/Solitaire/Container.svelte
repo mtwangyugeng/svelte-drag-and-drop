@@ -55,11 +55,19 @@ import Card from "./Card.svelte";
 </Dragable>
 
 <style>
+
     .DropField {
         position: absolute;
         top:0;
         background-color: green;
         opacity: 0;
+    }
+    .DropField  :global(.Placeholder) {
+        width: 100%;
+        height: 100%;
+        top:0;
+        left: 0;
+        position: absolute;
     }
     section { 
         position: relative;

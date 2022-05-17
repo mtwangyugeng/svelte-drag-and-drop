@@ -12,8 +12,10 @@
     section {
         width: 100px;
         height: 160px;
-        border: 2px solid #000;
+        border-radius: 5px;
 
         background-color: #fff;
+        -webkit-box-shadow: 1px 0px 34px -4px rgba(0,0,0,0.44); 
+box-shadow: 1px 0px 34px -4px rgba(0,0,0,0.44);
     }
 </style>

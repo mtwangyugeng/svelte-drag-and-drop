@@ -64,4 +64,14 @@ import TicTacToe from './lib/demos/tic-tac-toe/TicTacToe.svelte';
 	border-radius: 20px;
 	border: 3px solid orange;
 	}
+
+	/* :global(html) {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  } */
 </style>

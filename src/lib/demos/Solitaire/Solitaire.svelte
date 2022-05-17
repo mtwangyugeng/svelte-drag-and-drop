@@ -33,8 +33,10 @@ function handleRecieve(stackI) {
 
 <style>
     section {
-        background-color: red;
+        background-color: darkgreen;
         display: flex;
+        height: 100%;
+        /* transform: rotate(-90deg); */
     }
     div {
         width: 200px
