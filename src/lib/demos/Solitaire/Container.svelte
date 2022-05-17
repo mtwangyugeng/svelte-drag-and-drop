@@ -38,7 +38,7 @@ import Card from "./Card.svelte";
 
         <div class=Child>
         {#if stack.length - 1 <= index}
-            {#if !$dragging || $dragging.stackI !== stackI}
+            {#if $dragging && $dragging.stackI !== stackI}
                 <span class=DropField>
                     <Card>
                         <DropField on:receive={handleRecieve(stackI)}/>
@@ -59,6 +59,7 @@ import Card from "./Card.svelte";
         position: absolute;
         top:0;
         background-color: green;
+        opacity: 0;
     }
     section { 
         position: relative;

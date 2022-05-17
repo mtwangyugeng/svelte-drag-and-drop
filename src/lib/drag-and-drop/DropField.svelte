@@ -205,6 +205,14 @@ import { BACK_AMINATION_SPEED } from './const';
         height: 100%;
         position: relative;
     }
+    .Placeholder {
+        width: 100%;
+        height: 100%;
+        top:0;
+        left: 0;
+        background-color: red;
+        position: absolute;
+    }
     .Cover {
         z-index: 9999;
         height: 100%;
