@@ -1,16 +1,29 @@
 <script>
 import Card from "./Card.svelte";
-import Container from "./Container.svelte";
+import Container, { dragging } from "./Container.svelte";
 
-let testArr = [0, 1, 2, 3, 4]
+let testArr = 
+[
+    [0, 1, 2, 3, 4],
+    [5, 6, 7, 8, 9],
+]
+
+function handleRecieve(stackI) {
+    const neo = [...testArr]
+    const dc = neo[$dragging.stackI].splice($dragging.index)
+    console.log(dc)
+    neo[stackI] = neo[stackI].concat(dc)
+    testArr = neo
+}
 
 </script>
 
 <section>
-    <div>
-        <Container stack={testArr} index={0}>
-        </Container>
-    </div>
+    {#each testArr as stack,i (i)}
+        <div>
+            <Container stack={stack} index={0} stackI={i} handleRecieve={handleRecieve} />
+        </div>
+    {/each}
 </section>
 
 <style>

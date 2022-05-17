@@ -4,6 +4,7 @@
 
 <section>
     {card}
+    <slot/>
 </section>
 
 
