@@ -33,7 +33,7 @@
      * the Dropfield must know the exact element droped in
      */
     import {draggingElement} from "./Dragable.svelte";
-    import {createEventDispatcher, onMount} from 'svelte';
+    import {createEventDispatcher, onDestroy, onMount} from 'svelte';
 import { BACK_AMINATION_SPEED } from './const';
    
     export let enabled = true;
@@ -135,13 +135,22 @@ import { BACK_AMINATION_SPEED } from './const';
 
     let id = $nextId;
     nextId.update( v => v + 1 )
-
+    
+    let refWrapper={}
     onMount (()=>{
+       
+        span = refWrapper.span;
+        placeholder = refWrapper.placeholder
         iniInfo()
+    })
+    onDestroy(()=>{
+        delete refWrapper.span
+        delete refWrapper.placeholder
     })
 
     const iniInfo = () => {
-        // console.log("IniInfo")
+        
+
         const bodyRect = span.getBoundingClientRect();
         pX = bodyRect.left;
         pY = bodyRect.top;
@@ -164,16 +173,17 @@ import { BACK_AMINATION_SPEED } from './const';
 
         }
     }
-
+    
+    
 </script>
 
 <!-- class:Focused = {focused && $dragging} -->
 <section 
-    bind:this={span} 
+    bind:this={refWrapper.span} 
     
     >
     <span class="Placeholder"
-        bind:this={placeholder}
+        bind:this={refWrapper.placeholder}
         on:mousedown={handleClick}
     >
     
