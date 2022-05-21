@@ -60,8 +60,9 @@ import { BACK_AMINATION_SPEED } from './const';
         Drills deep in the darkness,
         all to fortify the base.
     */
+    let span;
     dragging.subscribe((v)=>{
-        if(!enabled)
+        if(!enabled || !span)
             return
 
         if(v) {
@@ -121,7 +122,7 @@ import { BACK_AMINATION_SPEED } from './const';
      
     // When dragging element entered the field
    
-    let span;
+    
 
     let placeholder;
 

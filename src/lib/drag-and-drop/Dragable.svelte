@@ -36,8 +36,12 @@ const setMousePos = (bodyRect, clientX, clientY) => {
 }
 
 let isMoving = false;
+import {createEventDispatcher} from 'svelte';
+const dispatch = createEventDispatcher();
 
 const initiateMove = (e) => {
+    dispatch('start');
+
     const bodyRect = span.getBoundingClientRect();
     if (e.type === "mousedown"){
         setMousePos(bodyRect, e.clientX, e.clientY)

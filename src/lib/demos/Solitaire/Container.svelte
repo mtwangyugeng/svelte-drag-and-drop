@@ -29,8 +29,8 @@ import Card from "./Card.svelte";
 </script>
 
 
-<Dragable >
-    <section on:mousedown={handleMouseDown(stackI, index)}>
+<Dragable on:start={handleMouseDown(stackI, index)}>
+    <section >
     
         <div class=Card>
             <Card card={stack[index] + " " + stackI}/>
@@ -60,7 +60,7 @@ import Card from "./Card.svelte";
         position: absolute;
         top:0;
         background-color: green;
-        opacity: 0;
+        opacity: 1;
     }
     .DropField  :global(.Placeholder) {
         width: 100%;

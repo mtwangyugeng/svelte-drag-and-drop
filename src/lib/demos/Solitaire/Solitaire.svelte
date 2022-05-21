@@ -19,16 +19,24 @@
 
 <script>
 import Container, { dragging } from "./Container.svelte";
+import Deck from "./Deck.svelte";
 
 let deck = [...DECK]
 
 deck = shuffleDeck(deck)
 
 let board = Array(7).fill(null).map(v=>[]);
-function distributeBoard() {
+async function distributeBoard() {
     for (let i = 0; i < board.length; i++) {
         for (let j=0; j < i + 1; j++) {
-            board[i] = [...board[i], deck.pop()]
+            const temp = deck.pop()
+            deck = [...deck]
+            // play the animation
+            await new Promise(resolve => setTimeout(resolve, 50));
+            board[i]=[...board[i], temp]
+            
+
+            
         }
     }
 }
@@ -50,6 +58,7 @@ function handleRecieve(stackI) {
 
 </script>
 
+<Deck deck={deck}/>
 <section>
     <div class=Board>
     {#each board as stack,i (i)}
