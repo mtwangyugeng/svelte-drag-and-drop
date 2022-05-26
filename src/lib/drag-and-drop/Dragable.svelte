@@ -36,11 +36,9 @@ const setMousePos = (bodyRect, clientX, clientY) => {
 }
 
 let isMoving = false;
-import {createEventDispatcher} from 'svelte';
-const dispatch = createEventDispatcher();
+import {onDestroy} from 'svelte';
 
 const initiateMove = (e) => {
-    dispatch('start');
 
     const bodyRect = span.getBoundingClientRect();
     if (e.type === "mousedown"){
@@ -109,6 +107,10 @@ const setDragging = () => {
     // runCheckCollision()
 }
 
+const refSave = {span}
+onDestroy(()=> {
+    delete refSave.span;
+})
 </script>
 
 

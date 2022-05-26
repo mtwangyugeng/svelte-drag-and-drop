@@ -20,6 +20,8 @@
 <script>
 import Container, { dragging } from "./Container.svelte";
 import Deck from "./Deck.svelte";
+import FourStacks from "./TopStacks/FourStacks.svelte";
+import Stack from "./TopStacks/Stack.svelte";
 
 let deck = [...DECK]
 
@@ -51,14 +53,13 @@ function handleRecieve(stackI) {
         neo[stackI] = neo[stackI].concat(dc)
         console.log(stackI)
         board = neo
-
-        dragging.set(null)
     }
 }
 
 </script>
 
 <Deck deck={deck}/>
+<FourStacks />
 <section>
     <div class=Board>
     {#each board as stack,i (i)}

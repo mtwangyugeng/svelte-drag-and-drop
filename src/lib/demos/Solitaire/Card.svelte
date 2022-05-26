@@ -2,14 +2,14 @@
     export let card = "";
 </script>
 
-<section>
+<section class=Card>
     {card}
     <slot/>
 </section>
 
 
 <style>
-    section {
+    :global(.Card) {
         width: 100px;
         height: 160px;
         border-radius: 5px;

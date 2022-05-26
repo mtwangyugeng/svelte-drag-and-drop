@@ -6,6 +6,7 @@
     function handleMouseDown(stackI, index) {
         return () => {
             dragging.set({
+                from: "board",
                 stackI,
                 index
             })
@@ -28,17 +29,18 @@ import Card from "./Card.svelte";
 
 </script>
 
-
-<Dragable on:start={handleMouseDown(stackI, index)}>
-    <section >
-    
+<div class=Card>
+<Dragable>
+    <section on:mousedown={handleMouseDown(stackI, index)}>
+        {#if stack[index]}
         <div class=Card>
             <Card card={stack[index] + " " + stackI}/>
         </div>
+        {/if}
 
-        <div class=Child>
+        
         {#if stack.length - 1 <= index}
-            {#if $dragging && $dragging.stackI !== stackI}
+            {#if !$dragging || $dragging.stackI !== stackI}
                 <span class=DropField>
                     <Card>
                         <DropField on:receive={handleRecieve(stackI)}/>
@@ -46,13 +48,14 @@ import Card from "./Card.svelte";
                 </span>
             {/if}
         {:else}
-        
+        <div class=Child>
             <svelte:self stack={stack} index={(index + 1)} stackI={stackI} handleRecieve={handleRecieve}/>
-        
-        {/if}
         </div>
+        {/if}
+        
     </section>
 </Dragable>
+</div>
 
 <style>
 
@@ -60,14 +63,15 @@ import Card from "./Card.svelte";
         position: absolute;
         top:0;
         background-color: green;
-        opacity: 1;
+        opacity: 0.5;
     }
     .DropField  :global(.Placeholder) {
         width: 100%;
         height: 100%;
-        top:0;
+        top:30px;
         left: 0;
         position: absolute;
+        
     }
     section { 
         position: relative;
@@ -75,5 +79,8 @@ import Card from "./Card.svelte";
     .Child {
         top: 30px;
         position: absolute;
+    }
+    .Card {
+        background-color: red;
     }
 </style>
